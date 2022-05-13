@@ -23,27 +23,29 @@ class Character(models.Model):
 
 
 class LevelUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    email = models.CharField(max_length=50)
-    gender = models.CharField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=50, default="Prefer not")
     birthday = models.CharField(max_length=50)
     img_src = models.CharField(max_length=150)
-    location = models.CharField(max_length=50)
+    location = models.CharField(max_length=50, default="Earth")
     joined = models.DateTimeField('Joined')
-    bio = models.CharField(max_length=500)
+    bio = models.CharField(max_length=500, default="Your Bio!")
     favorite_genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.user
 
 
 class UserStats(models.Model):
-    user = models.OneToOneField(LevelUser, on_delete=models.CASCADE)
+    leveluser = models.OneToOneField(LevelUser, on_delete=models.CASCADE)
     total = models.IntegerField(default=0)
     playing = models.IntegerField(default=0)
     completed = models.IntegerField(default=0)
     on_hold = models.IntegerField(default=0)
     dropped = models.IntegerField(default=0)
     plan_to_play = models.IntegerField(default=0)
-    games = models.ForeignKey(Game, on_delete=models.CASCADE)
-    characters = models.ForeignKey(Character, on_delete=models.CASCADE)
+    games = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
+    characters = models.ForeignKey(Character, on_delete=models.CASCADE, null=True)
 
 
 class Review(models.Model):

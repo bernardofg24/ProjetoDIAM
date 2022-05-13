@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create LevelCheck Account!</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/style.css' %}" />
+</head>
+<body>
+
+    <h2>Create account</h2>
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'levelcheck:create_acc' %}">
+        {% csrf_token %}
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" required><br>
+        <input type="submit" value="Registar">
+        <a href="{% url 'levelcheck:login_form' %}">Already have an account? Login here!</a>
+    </form>
+
+    {% if err_username %}
+        <p><strong>{{ err_username }}</strong></p>
+    {% endif %}
+
+    {% if err_email %}
+        <p><strong>{{ err_email }}</strong></p>
+    {% endif %}
+
+</body>
+</html>
