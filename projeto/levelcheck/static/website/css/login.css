@@ -1,0 +1,107 @@
+@font-face {
+  font-family: modern;
+  src: url("../fonts/modern.ttf");
+}
+
+html{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: modern;
+	color: white;
+}
+
+body{
+	background-image: url("../images/background.png");
+	height: 60%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	padding-top: 15%;
+}
+
+#login{
+	margin: auto;
+	padding: 0;
+	width: 30%;
+	height: 50%;
+	text-align: center;
+}
+
+fieldset{
+	border-color: #3500D3;
+	border-style: solid;
+	border-radius: 12px;
+	border-width: 3px;
+	background-color: rgba(16,16,16,0.66);
+	height: 100%;
+	padding-top: 7.5%;
+}
+
+legend{
+	font-size: 2em;
+}
+
+form{
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+label{
+	display: block;
+	margin: 0;
+	margin-bottom: 1%;
+}
+
+input{
+	display: block;
+	margin: auto;
+	border-color: #3500D3;
+	border-style: solid;
+	border-radius: 8px;
+	background-color: rgb(16,16,16);
+	color: white;
+	width: 35%;
+}
+
+input[type=text]{
+	font-family: modern;
+}
+
+input[type=submit]{
+	width: 20%;
+	background-color: #0C0032;
+	font-family: modern;
+	font-size: 1.25em;
+	cursor: pointer;
+}
+
+input[type=submit]:hover{
+	background-color: #240090;
+}
+
+input[type=submit]:active{
+	background-color: #0C0032;
+}
+
+a{
+	text-decoration: none;
+	display: block;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+
+a:visited{
+	color: white;
+}
+
+a:hover{
+	color: #3500D3;
+}
+
+a:active{
+	color: #240090;
+}

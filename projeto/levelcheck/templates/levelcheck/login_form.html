@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <title>LevelCheck Login!</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'website/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/login.css' %}" />
 </head>
 <body>
-
-    <h2>Login</h2>
-
-    <form action="{% url 'levelcheck:login_form' %}" method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:&nbsp</label>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Login">
-        <a href="{% url 'levelcheck:create_acc' %}">Don't have an account? Create one!</a>
-    </form>
+    <div id="login">
+        <form action="{% url 'levelcheck:login_form' %}" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend>LevelCheck</legend>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username"><br>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password"><br>
+                <input type="submit" value="Login"><br><br>
+                <a href="{% url 'levelcheck:create_acc' %}">Don't have an account? Sign up now!</a>
+            </fieldset>
+        </form>
+    </div>
 
     {% if err_creds %}
         <p><strong>{{ err_creds }}</strong></p>
