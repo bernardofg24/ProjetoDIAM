@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile!</title>
+</head>
+<body>
+
+    <h2>Profile</h2>
+
+    <p>Username: {{request.user.username}}</p>
+    <p>Joined: {{request.user.leveluser.joined}}</p>
+    <p>Gender: {{request.user.leveluser.gender}}</p>
+    <p>Birthday: {{request.user.leveluser.birthday}}</p>
+    <p>Location: {{request.user.leveluser.location}}</p>
+    {% load static %}
+    <img src="{% static request.user.leveluser.img_src %}"><br><br>
+
+</body>
+</html>

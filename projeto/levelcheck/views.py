@@ -47,7 +47,7 @@ def create_acc(request):
         email = request.POST['email']
         password = request.POST['password']
         birthday = request.POST['birthday']
-        src = "projeto/levelcheck/static/website/images/jiggly.jpg"
+        src = "/website/images/jiggly.jpg"
         joined = timezone.now()
 
         u = User.objects.create_user(username, email, password)
@@ -67,5 +67,5 @@ def index(request):
 
 
 @login_required(login_url='/levelcheck')
-def profile(request):
-    return render(request, 'levelcheck/profile.html')
+def profile(request, username):
+    return render(request, 'levelcheck/profile.html', {'username': username})
