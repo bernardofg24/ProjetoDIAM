@@ -10,3 +10,9 @@ class GameForm(forms.ModelForm):
         model = Game
         fields = '__all__'
 
+
+class GenreForm(forms.ModelForm):
+
+    class Meta:
+        model = Genre
+        fields = '__all__'
