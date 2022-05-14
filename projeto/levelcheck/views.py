@@ -65,7 +65,8 @@ def create_acc(request):
 @login_required(login_url='/levelcheck')
 def index(request):
     games = Game.objects.all().order_by('-release')[:5]
-    return render(request, 'levelcheck/index.html', {'games': games})
+    characters = Character.objects.all().order_by('-pub_date')[:5]
+    return render(request, 'levelcheck/index.html', {'games': games, 'characters': characters})
 
 
 @login_required(login_url='/levelcheck')

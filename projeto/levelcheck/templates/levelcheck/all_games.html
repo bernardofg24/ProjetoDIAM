@@ -13,13 +13,13 @@
                 <th>Release Date</th>
             </tr>
             {% for g in games %}
-            <tr data-href="{% url 'levelcheck:game_detail' g.title%}">
-                <td style="width: 2.5%; text-align: center"><img class="table_image" src="{{ g.img.url }}"></td>
-                <td style="width: 5%; text-align: center; font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
-                <td style="width: 5%; text-align: center">{{ g.genre_id }}</td>
-                <td style="width: 5%; text-align: center">{{ g.developer }}</td>
-                <td style="width: 5%; text-align: center">{{ g.publisher }}</td>
-                <td style="width: 5%; text-align: center">{{ g.release }}</td>
+            <tr style="text-align: center" data-href="{% url 'levelcheck:game_detail' g.title%}">
+                <td style="width: 2.5%"><img class="table_image" src="{{ g.img.url }}"></td>
+                <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
+                <td style="width: 5%">{{ g.genre_id }}</td>
+                <td style="width: 5%">{{ g.developer }}</td>
+                <td style="width: 5%">{{ g.publisher }}</td>
+                <td style="width: 5%">{{ g.release }}</td>
             </tr>
             {% empty %}
                 <p>No games :(</p>

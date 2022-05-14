@@ -1,7 +1,7 @@
 {% extends "levelcheck/index.html" %}
 
 {% block content %}
-    <header style="height: 5%"><h1>GAMES</h1></header>
+    <header style="height: 5%"><h1>CHARACTERS</h1></header>
     <section style="height: 94.7%">
         <table>
             <tr>
@@ -11,11 +11,11 @@
 			    <th>Game</th>
             </tr>
             {% for c in characters %}
-            <tr data-href="{% url 'levelcheck:logout' %}">
-                <td style="width: 1.5%; text-align: center"><img class="table_image" src="{{ c.img.url }}"></td>
-                <td style="width: 5%; text-align: center; font-weight: bold; font-size: 1.5em">{{ c.name }}</td>
-                <td style="width: 5%; text-align: center">{{ c.age }}</td>
-                <td style="width: 5%; text-align: center">{{ c.game.title }}</td>
+            <tr style="text-align: center" data-href="{% url 'levelcheck:logout' %}">
+                <td style="width: 1.5%"><img class="table_image" src="{{ c.img.url }}"></td>
+                <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ c.name }}</td>
+                <td style="width: 5%">{{ c.age }}</td>
+                <td style="width: 5%">{{ c.game.title }}</td>
             </tr>
             {% empty %}
                 <p>No characters :(</p>
