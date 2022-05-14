@@ -13,7 +13,7 @@
                 <th>Release Date</th>
             </tr>
             {% for g in games %}
-            <tr data-href="{% url 'levelcheck:logout' %}">
+            <tr data-href="{% url 'levelcheck:game_detail' g.title%}">
                 <td style="width: 2.5%; text-align: center"><img class="table_image" src="{{ g.img.url }}"></td>
                 <td style="width: 5%; text-align: center; font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
                 <td style="width: 5%; text-align: center">{{ g.genre_id }}</td>
