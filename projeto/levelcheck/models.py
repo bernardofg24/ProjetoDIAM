@@ -18,7 +18,7 @@ class Game(models.Model):
     img = models.ImageField(upload_to='games/')
     developer = models.CharField(max_length=50)
     publisher = models.CharField(max_length=50)
-    release = models.DateTimeField('Release Date')
+    release = models.DateField('Release Date')
 
 
 class Review(models.Model):
