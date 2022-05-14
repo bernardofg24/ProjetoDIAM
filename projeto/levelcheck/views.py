@@ -125,5 +125,5 @@ def create_game(request):
 
 @login_required
 def all_games(request):
-    games = Game.objects.all()
+    games = Game.objects.all().order_by('-release')
     return render(request, 'levelcheck/all_games.html', context={'games': games})

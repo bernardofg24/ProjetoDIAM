@@ -7,6 +7,11 @@ class Genre(models.Model):
     genre = models.CharField(max_length=50, primary_key=True)
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.CharField(max_length=150)
+
+
 class Game(models.Model):
     title = models.CharField(max_length=50, primary_key=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
@@ -16,10 +21,20 @@ class Game(models.Model):
     release = models.DateTimeField('Release Date')
 
 
+class Review(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    game = models.OneToOneField(Game, on_delete=models.CASCADE)
+    rating = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)])
+    pub_date = models.DateTimeField('Posted')
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+
+
 class Character(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     age = models.CharField(max_length=50)
+    pub_date = models.DateTimeField('Posted')
 
 
 class LevelUser(models.Model):
@@ -30,7 +45,6 @@ class LevelUser(models.Model):
     location = models.CharField(max_length=50, default="Earth")
     joined = models.DateTimeField('Joined')
     bio = models.CharField(max_length=500, default="Your Bio!")
-    favorite_genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.user
@@ -46,10 +60,13 @@ class UserStats(models.Model):
     plan_to_play = models.IntegerField(default=0)
     games = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
     characters = models.ForeignKey(Character, on_delete=models.CASCADE, null=True)
+    genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
+    reviews = models.ForeignKey(Review, on_delete=models.SET_NULL, null=True)
 
 
-class Review(models.Model):
+class Discussion(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    game = models.OneToOneField(Game, on_delete=models.CASCADE)
-    rating = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)])
-    comment = models.CharField(max_length=500)
+    title = models.CharField(max_length=75)
+    text = models.CharField(max_length=300)
+    comments = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField('Posted')

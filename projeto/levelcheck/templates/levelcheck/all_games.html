@@ -5,7 +5,15 @@
     <title>All Games</title>
 </head>
 <body>
-
-
+    {% for g in games %}
+    <h4>{{ g.title }}</h4>
+    <h2>{{ g.genre_id }}</h2>
+    <p>{{ g.developer }}</p>
+    <p>{{ g.publisher }}</p>
+    <p>{{ g.release }}</p>
+    <img src="{{ g.img.url }}">
+    {% empty %}
+    <p>No games :(</p>
+    {% endfor %}
 </body>
 </html>
