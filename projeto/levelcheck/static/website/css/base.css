@@ -163,14 +163,32 @@ table{
 	color: white;
 }
 
-td{
+td, th{
 	padding: 8px;
-	background-color: rgba(16,16,16,0.33);
 }
 
 tr{
+	background-color: rgba(16,16,16,0.33);
 	border-bottom-style: solid;
 	border-color: #240090;
+}
+
+tr[data-href]{
+	cursor: pointer;
+}
+
+tr[data-href]:hover{
+	background-color: rgb(12,0,50);
+}
+
+th{
+	background-color: rgba(36,0,144,0.66);
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-bottom-style: solid;
+	border-color: #3500D3;
+	position: sticky;
+	top: 0;
 }
 
 section{
@@ -189,4 +207,9 @@ section{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.game_image{
+	max-width: 40%;
+	max-height: 30%;
 }
