@@ -7,22 +7,22 @@
     <link rel="stylesheet" type="text/css" href="{% static 'website/css/login.css' %}" />
 </head>
 <body>
+    {% block form %}
     <div id="login">
         <form action="{% url 'levelcheck:login_form' %}" method="post">
             {% csrf_token %}
             <fieldset>
                 <legend>LevelCheck</legend>
-                {% block form %}
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username"><br>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password"><br>
                 <input type="submit" value="Login"><br><br>
                 <a href="{% url 'levelcheck:create_acc' %}">Don't have an account? Sign up now!</a>
-                {% endblock %}
             </fieldset>
         </form>
     </div>
+    {% endblock %}
 
     {% if err_creds %}
         <p><strong>{{ err_creds }}</strong></p>
