@@ -27,7 +27,7 @@ nav{
 	border-bottom-style: solid;
 	border-color: #3500D3;
 	color: white;
-	display: flex
+	display: flex;
 }
 
 .nav_link{
@@ -70,14 +70,6 @@ nav{
 h1{
 	margin: 0;
 	padding: 0;
-}
-
-#greeting{
-	padding-top: 0.4%;
-	padding-right: 21%;
-	width: 85%;
-	text-align: center;
-	font-size: 2em;
 }
 
 #top_left{
