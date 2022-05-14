@@ -1,16 +1,22 @@
 {% extends "levelcheck/login_form.html" %}
 
 {% block form %}
-
-<label for="email">E-mail:</label>
-<input type="email" id="email" name="email" required><br>
-<label for="username">Username:</label>
-<input type="text" id="username" name="username" required><br>
-<label for="password">Password:</label>
-<input type="password" id="password" name="password" required><br>
-<label for="birthday">Birthday:</label>
-<input type="date" id="birthday" name="birthday" required><br>
-<input type="submit" value="Register">
-<a href="{% url 'levelcheck:login_form' %}">Already have an account? Login here!</a>
-
+<div id="signup">
+    <form action="{% url 'levelcheck:create_acc' %}" method="post">
+        {% csrf_token %}
+        <fieldset id="signup_fs">
+            <legend>LevelCheck</legend>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required><br>
+            <label for="birthday">Birthday</label>
+            <input type="date" id="birthday" name="birthday" required><br>
+            <input type="submit" value="Sign Up"><br><br>
+            <a href="{% url 'levelcheck:login_form' %}">Already have an account? Login here!</a>
+        </fieldset>
+    </form>
+</div>
 {% endblock %}
