@@ -122,3 +122,8 @@ def create_game(request):
         game_form = GameForm()
         return render(request, 'levelcheck/create_game.html', context={"game_form": game_form})
 
+
+@login_required
+def all_games(request):
+    games = Game.objects.all()
+    return render(request, 'levelcheck/all_games.html', context={'games': games})
