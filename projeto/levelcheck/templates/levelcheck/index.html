@@ -16,6 +16,7 @@
         <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:all_games' %}">REVIEWS</a>
         <a class="nav_link" style="width: 120px" href="{% url 'levelcheck:all_games' %}">DISCUSSIONS</a>
     </div>
+    <h1 id="greeting">WELCOME {{request.user.username}}!</h1>
     <div style="display: flex">
         <a class="nav_link" style="width: 90px" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
         <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>

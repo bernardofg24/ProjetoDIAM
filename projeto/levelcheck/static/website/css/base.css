@@ -72,6 +72,14 @@ h1{
 	padding: 0;
 }
 
+#greeting{
+	padding-top: 0.4%;
+	padding-right: 21%;
+	width: 85%;
+	text-align: center;
+	font-size: 2em;
+}
+
 #top_left{
 	height: 50%;
 	width: 49.8%;
