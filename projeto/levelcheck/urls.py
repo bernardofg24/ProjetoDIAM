@@ -14,4 +14,5 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('profile/<str:username>', views.profile, name='profile'),
     path('editprofile/<int:id>', views.edit_profile, name='edit_profile'),
+    path('creategame', views.create_game, name='create_game'),
 ]

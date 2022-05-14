@@ -10,7 +10,7 @@ class Genre(models.Model):
 class Game(models.Model):
     title = models.CharField(max_length=50, primary_key=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    img_src = models.CharField(max_length=150)
+    img = models.ImageField(upload_to='games/')
     developer = models.CharField(max_length=50)
     publisher = models.CharField(max_length=50)
     release = models.DateTimeField('Release Date')

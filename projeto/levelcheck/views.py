@@ -6,8 +6,9 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import authenticate, login, logout as django_logout
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from .models import *
+from .forms import GameForm
 
 
 def login_form(request):
@@ -108,3 +109,16 @@ def edit_profile(request, id):
         return HttpResponseRedirect(reverse('levelcheck:profile', args=username))
     else:
         return render(request, 'levelcheck/edit_profile.html')
+
+
+@login_required
+def create_game(request):
+    if request.method == "POST":
+        game_form = GameForm(request.POST, request.FILES)
+        if game_form.is_valid():
+            game_form.save()
+        return HttpResponseRedirect(reverse('levelcheck:index'))
+    else:
+        game_form = GameForm()
+        return render(request, 'levelcheck/create_game.html', context={"game_form": game_form})
+
