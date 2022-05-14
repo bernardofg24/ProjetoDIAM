@@ -30,7 +30,7 @@ nav{
 	display: flex
 }
 
-a{
+.nav_link{
 	background-color: #190061;
 	height: 34px;
 	margin: 0;
@@ -38,38 +38,155 @@ a{
 	padding-top: 16px;
 	text-align: center;
 	text-decoration: none;
+	font-weight: bold;
 }
 
-a:visited{
+.nav_link:visited{
 	color: white;
 }
 
-a:hover{
+.nav_link:hover{
 	background-color: #240090;
 	cursor: pointer;
 }
 
-a:active{
+.nav_link:active{
 	background-color: #0C0032;
 }
 
 #main{
-	background-color: rgba(16,16,16,0.25);
+	background-color: rgba(16,16,16,0.66);
 	height: 94%;
 	border-bottom-style: solid;
 	border-right-style: solid;
 	border-left-style: solid;
 	border-color: #3500D3;
-}
-
-p{
 	margin: 0;
 	padding: 0;
-	font-size: 2em;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+h1{
+	margin: 0;
+	padding: 0;
 }
 
 #greeting{
 	padding-top: 0.4%;
+	padding-right: 21%;
 	width: 85%;
 	text-align: center;
+	font-size: 2em;
+}
+
+#top_left{
+	height: 50%;
+	width: 49.8%;
+	margin: 0;
+	padding: 0;
+	border-bottom-style: solid;
+	border-color: #3500D3;
+}
+
+#top_right{
+	height: 50%;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-color: #3500D3;
+}
+
+#bottom_left{
+	height: 49.7%;
+	width: 49.8%;
+	margin: 0;
+	padding: 0;
+	border-right-style: solid;
+	border-color: #3500D3;
+}
+
+#bottom_right{
+	height: 49.7%;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+}
+
+header{
+	background-color: rgba(12,0,50,0.75);
+	width: 100%;
+	height: 10%;
+	margin: 0;
+	padding: 0;
+	border-bottom-style: solid;
+	border-color: #240090;
+	color: white;
+	font-size: 0.75em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.link_button{
+	background-color: #0C0032;
+	border: solid;
+	border-color: #3500D3;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	width: 10%;
+	height: 40%;
+	padding: 0;
+	padding-top: 0.3%;
+	margin: 0;
+	margin-bottom: 0.5%;
+	font-family: modern;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 12px;
+}
+
+.link_button:hover{
+	background-color: #190061;
+}
+
+.link_button:active{
+	background-color: #0C0032;
+}
+
+table{
+	border-collapse: collapse;
+	width: 100%;
+	color: white;
+}
+
+td{
+	padding: 8px;
+	background-color: rgba(16,16,16,0.33);
+}
+
+tr{
+	border-bottom-style: solid;
+	border-color: #240090;
+}
+
+section{
+	height: 77.5%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+}
+
+.section_button{
+	height: 12.5%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

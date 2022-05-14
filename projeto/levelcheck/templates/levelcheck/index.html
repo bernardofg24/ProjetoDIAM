@@ -9,18 +9,205 @@
 <body>
 <nav>
     <div style="display: flex">
-        <a style="width: 72.5px">INDEX</a>
-        <a style="width: 115px">RANKINGS</a>
-        <a style="width: 100px" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
+        <a class="nav_link" style="width: 75px">INDEX</a>
+        <a class="nav_link" style="width: 90px" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
+        <a class="nav_link" style="width: 80px" href="{% url 'levelcheck:all_games' %}">GAMES</a>
+        <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
     </div>
-	<p id="greeting">Welcome {{request.user.username}}!</p>
-    <a style="width: 115px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
+	<h1 id="greeting">WELCOME {{request.user.username}}!</h1>
+    <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
 </nav>
 
 <div id="main">
-    {% block content %}
-        <a style="width: 115px" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
-    {% endblock %}
+    <div id="top_left">
+        <header><h1>RECENT GAMES</h1></header>
+        <section>
+
+		<table>
+		  <tr>
+			<td>Alfreds Futterkiste</td>
+			<td>Maria Anders</td>
+			<td>Germany</td>
+		  </tr>
+		  <tr>
+			<td>Berglunds snabbköp</td>
+			<td>Christina Berglund</td>
+			<td>Sweden</td>
+		  </tr>
+		  <tr>
+			<td>Centro comercial Moctezuma</td>
+			<td>Francisco Chang</td>
+			<td>Mexico</td>
+		  </tr>
+		  <tr>
+			<td>Ernst Handel</td>
+			<td>Roland Mendel</td>
+			<td>Austria</td>
+		  </tr>
+		  <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+            <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+            <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+            <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+            <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+            <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+             <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+             <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+             <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+             <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+		</table>
+	</section>
+        <div class="section_button">
+        <a class="link_button" href="{% url 'levelcheck:all_games' %}">SEE ALL</a>
+            </div>
+    </div>
+    <div id="top_right">
+        <header><h1>RECENT CHARACTERS</h1></header>
+        <section>
+
+		<table>
+		  <tr>
+			<td>Alfreds Futterkiste</td>
+			<td>Maria Anders</td>
+			<td>Germany</td>
+		  </tr>
+		  <tr>
+			<td>Berglunds snabbköp</td>
+			<td>Christina Berglund</td>
+			<td>Sweden</td>
+		  </tr>
+		  <tr>
+			<td>Centro comercial Moctezuma</td>
+			<td>Francisco Chang</td>
+			<td>Mexico</td>
+		  </tr>
+		  <tr>
+			<td>Ernst Handel</td>
+			<td>Roland Mendel</td>
+			<td>Austria</td>
+		  </tr>
+		  <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+		</table>
+	</section>
+        <div class="section_button">
+        <a class="link_button" >SEE ALL</a>
+            </div>
+    </div>
+    <div id="bottom_left">
+        <header><h1>RECENT REVIEWS</h1></header>
+        <section>
+
+		<table>
+		  <tr>
+			<td>Alfreds Futterkiste</td>
+			<td>Maria Anders</td>
+			<td>Germany</td>
+		  </tr>
+		  <tr>
+			<td>Berglunds snabbköp</td>
+			<td>Christina Berglund</td>
+			<td>Sweden</td>
+		  </tr>
+		  <tr>
+			<td>Centro comercial Moctezuma</td>
+			<td>Francisco Chang</td>
+			<td>Mexico</td>
+		  </tr>
+		  <tr>
+			<td>Ernst Handel</td>
+			<td>Roland Mendel</td>
+			<td>Austria</td>
+		  </tr>
+		  <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+		</table>
+	</section>
+        <div class="section_button">
+        <a class="link_button" >SEE ALL</a>
+            </div>
+    </div>
+    <div id="bottom_right">
+        <header><h1>RECENT DISCUSSIONS</h1></header>
+        <section>
+
+		<table>
+		  <tr>
+			<td>Alfreds Futterkiste</td>
+			<td>Maria Anders</td>
+			<td>Germany</td>
+		  </tr>
+		  <tr>
+			<td>Berglunds snabbköp</td>
+			<td>Christina Berglund</td>
+			<td>Sweden</td>
+		  </tr>
+		  <tr>
+			<td>Centro comercial Moctezuma</td>
+			<td>Francisco Chang</td>
+			<td>Mexico</td>
+		  </tr>
+		  <tr>
+			<td>Ernst Handel</td>
+			<td>Roland Mendel</td>
+			<td>Austria</td>
+		  </tr>
+		  <tr>
+			<td>Island Trading</td>
+			<td>Helen Bennett</td>
+			<td>UK</td>
+		  </tr>
+		</table>
+	</section>
+        <div class="section_button">
+        <a class="link_button" >SEE ALL</a>
+            </div>
+    </div>
 </div>
 </body>
 </html>
