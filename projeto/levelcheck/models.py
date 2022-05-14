@@ -26,11 +26,15 @@ class Game(models.Model):
 class Review(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     game = models.OneToOneField(Game, on_delete=models.CASCADE)
+    review_title = models.CharField(max_length=50)
     text = models.CharField(max_length=300)
     rating = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)])
-    pub_date = models.DateTimeField('Posted')
+    pub_date = models.DateTimeField('Posted', default=timezone.now)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user', 'game'], name='user_game_review')]
 
 
 class Character(models.Model):

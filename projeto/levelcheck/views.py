@@ -165,9 +165,18 @@ def create_character(request):
 @login_required(login_url='/levelcheck')
 def create_review(request, title):
     if request.method == "POST":
-        return render(request, 'levelcheck/index.html')
+        review_title = request.POST['title']
+        user = request.user
+        game = get_object_or_404(Game, pk=title)
+        text = request.POST['text']
+        rating = request.POST['rating']
+
+        r = Review(review_title=review_title, user=user, game=game, text=text, rating=rating)
+        r.save()
+        return HttpResponseRedirect(reverse('levelcheck:index'))
     else:
-        return render(request, 'levelcheck/create_review.html')
+        game = get_object_or_404(Game, pk=title)
+        return render(request, 'levelcheck/create_review.html', {"game": game})
 
 
 @login_required(login_url='/levelcheck')
@@ -180,3 +189,9 @@ def all_games(request):
 def all_characters(request):
     characters = Character.objects.all().order_by('-pub_date')
     return render(request, 'levelcheck/all_characters.html', context={'characters': characters})
+
+
+@login_required(login_url='/levelcheck')
+def all_reviews(request):
+    reviews = Review.objects.all().order_by('-pub_date')
+    return render(request, 'levelcheck/all_reviews.html', context={'reviews': reviews})
