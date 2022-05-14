@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Characters</title>
+</head>
+<body>
+    {% for c in characters %}
+    <h4>{{ c.name }}</h4>
+    <h2>{{ c.age }}</h2>
+    <p>{{ c.game }}</p>
+    <img src="{{ c.img.url }}">
+    {% empty %}
+    <p>No characters :(</p>
+    {% endfor %}
+</body>
+</html>

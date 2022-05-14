@@ -1,5 +1,5 @@
 from django import forms
-from .models import Game, Genre
+from .models import Game, Genre, Character
 
 # Create your forms here.
 
@@ -16,3 +16,10 @@ class GenreForm(forms.ModelForm):
     class Meta:
         model = Genre
         fields = '__all__'
+
+
+class CharacterForm(forms.ModelForm):
+
+    class Meta:
+        model = Character
+        exclude = ('pub_date',)

@@ -1,6 +1,8 @@
+import django.utils.timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Genre(models.Model):
@@ -34,7 +36,8 @@ class Character(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     age = models.CharField(max_length=50)
-    pub_date = models.DateTimeField('Posted')
+    img = models.ImageField(upload_to='characters/')
+    pub_date = models.DateTimeField('Posted', default=timezone.now)
 
 
 class LevelUser(models.Model):

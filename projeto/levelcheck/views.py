@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout as django_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .forms import GameForm, GenreForm
+from .forms import GameForm, GenreForm, CharacterForm
 
 
 def login_form(request):
@@ -136,6 +136,24 @@ def create_genre(request):
 
 
 @login_required
+def create_character(request):
+    if request.method == "POST":
+        character_form = CharacterForm(request.POST, request.FILES)
+        if character_form.is_valid():
+            character_form.save()
+        return HttpResponseRedirect(reverse('levelcheck:index'))
+    else:
+        character_form = CharacterForm()
+        return render(request, 'levelcheck/create_character.html', context={"character_form": character_form})
+
+
+@login_required
 def all_games(request):
     games = Game.objects.all()
     return render(request, 'levelcheck/all_games.html', context={'games': games})
+
+
+@login_required
+def all_characters(request):
+    characters = Character.objects.all()
+    return render(request, 'levelcheck/all_characters.html', context={'characters': characters})
