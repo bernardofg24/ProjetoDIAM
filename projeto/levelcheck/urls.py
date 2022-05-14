@@ -17,6 +17,7 @@ urlpatterns = [
     path('creategame', views.create_game, name='create_game'),
     path('creategenre', views.create_genre, name='create_genre'),
     path('createcharacter', views.create_character, name='create_character'),
+    path('createreview/<str:title>', views.create_review, name='create_review'),
     path('profile/<str:username>', views.profile, name='profile'),
     path('editprofile/<int:id>', views.edit_profile, name='edit_profile'),
     path('<str:title>', views.game_detail, name='game_detail'),

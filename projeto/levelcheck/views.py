@@ -163,6 +163,14 @@ def create_character(request):
 
 
 @login_required(login_url='/levelcheck')
+def create_review(request, title):
+    if request.method == "POST":
+        return render(request, 'levelcheck/index.html')
+    else:
+        return render(request, 'levelcheck/create_review.html')
+
+
+@login_required(login_url='/levelcheck')
 def all_games(request):
     games = Game.objects.all().order_by('-release')
     return render(request, 'levelcheck/all_games.html', context={'games': games})

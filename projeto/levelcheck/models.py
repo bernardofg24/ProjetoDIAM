@@ -26,6 +26,7 @@ class Game(models.Model):
 class Review(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     game = models.OneToOneField(Game, on_delete=models.CASCADE)
+    text = models.CharField(max_length=300)
     rating = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)])
     pub_date = models.DateTimeField('Posted')
     like = models.IntegerField(default=0)
