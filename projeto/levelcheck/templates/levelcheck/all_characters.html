@@ -8,7 +8,7 @@
     {% for c in characters %}
     <h4>{{ c.name }}</h4>
     <h2>{{ c.age }}</h2>
-    <p>{{ c.game }}</p>
+    <p>{{ c.game.title }}</p>
     <img src="{{ c.img.url }}">
     {% empty %}
     <p>No characters :(</p>

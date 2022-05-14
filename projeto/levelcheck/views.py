@@ -73,6 +73,12 @@ def profile(request, username):
 
 
 @login_required(login_url='/levelcheck')
+def game_detail(request, title):
+    game = get_object_or_404(Game, pk=title)
+    return render(request, 'levelcheck/game_detail.html', {'game': game})
+
+
+@login_required(login_url='/levelcheck')
 def edit_profile(request, id):
     if request.method == 'POST':
         leveluser = get_object_or_404(LevelUser, pk=id)
@@ -111,7 +117,7 @@ def edit_profile(request, id):
         return render(request, 'levelcheck/edit_profile.html')
 
 
-@login_required
+@login_required(login_url='/levelcheck')
 def create_game(request):
     if request.method == "POST":
         game_form = GameForm(request.POST, request.FILES)
@@ -123,7 +129,7 @@ def create_game(request):
         return render(request, 'levelcheck/create_game.html', context={"game_form": game_form})
 
 
-@login_required
+@login_required(login_url='/levelcheck')
 def create_genre(request):
     if request.method == "POST":
         genre_form = GenreForm(request.POST)
@@ -135,7 +141,7 @@ def create_genre(request):
         return render(request, 'levelcheck/create_genre.html', context={"genre_form": genre_form})
 
 
-@login_required
+@login_required(login_url='/levelcheck')
 def create_character(request):
     if request.method == "POST":
         character_form = CharacterForm(request.POST, request.FILES)
@@ -147,13 +153,13 @@ def create_character(request):
         return render(request, 'levelcheck/create_character.html', context={"character_form": character_form})
 
 
-@login_required
+@login_required(login_url='/levelcheck')
 def all_games(request):
-    games = Game.objects.all()
+    games = Game.objects.all().order_by('-release')
     return render(request, 'levelcheck/all_games.html', context={'games': games})
 
 
-@login_required
+@login_required(login_url='/levelcheck')
 def all_characters(request):
-    characters = Character.objects.all()
+    characters = Character.objects.all().order_by('-pub_date')
     return render(request, 'levelcheck/all_characters.html', context={'characters': characters})
