@@ -32,83 +32,20 @@
     <div id="top_left">
         <header><h1>RECENT GAMES</h1></header>
         <section>
-
-		<table>
-		  <tr>
-			<td>Alfreds Futterkiste</td>
-			<td>Maria Anders</td>
-			<td>Germany</td>
-		  </tr>
-		  <tr>
-			<td>Berglunds snabbköp</td>
-			<td>Christina Berglund</td>
-			<td>Sweden</td>
-		  </tr>
-		  <tr>
-			<td>Centro comercial Moctezuma</td>
-			<td>Francisco Chang</td>
-			<td>Mexico</td>
-		  </tr>
-		  <tr>
-			<td>Ernst Handel</td>
-			<td>Roland Mendel</td>
-			<td>Austria</td>
-		  </tr>
-		  <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-            <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-            <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-            <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-            <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-            <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-             <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-             <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-             <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-             <tr>
-			<td>Island Trading</td>
-			<td>Helen Bennett</td>
-			<td>UK</td>
-		  </tr>
-		</table>
-	</section>
+            <table>
+            {% for g in games %}
+            <tr data-href="{% url 'levelcheck:logout' %}">
+                <td style="width: 15%; text-align: center"><img class="table_image" src="{{ g.img.url }}"></td>
+                <td style="text-align: center; font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
+            </tr>
+            {% empty %}
+                <p>No games :(</p>
+            {% endfor %}
+            </table>
+	    </section>
         <div class="section_button">
-        <a class="link_button" href="{% url 'levelcheck:all_games' %}">SEE ALL</a>
-            </div>
+            <a class="link_button" href="{% url 'levelcheck:all_games' %}">SEE ALL</a>
+        </div>
     </div>
     <div id="top_right">
         <header><h1>RECENT CHARACTERS</h1></header>
@@ -220,5 +157,17 @@
     </div>
     {% endblock %}
 </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+
+            rows.forEach(row => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
