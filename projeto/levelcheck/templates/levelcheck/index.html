@@ -10,12 +10,16 @@
 <nav>
     <div style="display: flex">
         <a class="nav_link" style="width: 75px">INDEX</a>
-        <a class="nav_link" style="width: 90px" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
         <a class="nav_link" style="width: 80px" href="{% url 'levelcheck:all_games' %}">GAMES</a>
         <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
+        <a class="nav_link" style="width: 120px" href="{% url 'levelcheck:all_games' %}">CHARACTERS</a>
+        <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:all_games' %}">REVIEWS</a>
+        <a class="nav_link" style="width: 120px" href="{% url 'levelcheck:all_games' %}">DISCUSSIONS</a>
     </div>
-	<h1 id="greeting">WELCOME {{request.user.username}}!</h1>
-    <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
+    <div style="display: flex">
+        <a class="nav_link" style="width: 90px" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
+        <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
+    </div>
 </nav>
 
 <div id="main">
