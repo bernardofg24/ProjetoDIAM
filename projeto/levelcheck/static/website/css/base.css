@@ -41,7 +41,7 @@ nav{
 	font-weight: bold;
 }
 
-.nav_link:visited{
+.nav_link:visited, .nav_link:link{
 	color: white;
 }
 

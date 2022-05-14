@@ -103,7 +103,7 @@ a{
 	cursor: pointer;
 }
 
-a:visited{
+a:visited, a:link{
 	color: white;
 }
 
