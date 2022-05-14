@@ -11,6 +11,7 @@
 			    <th>Developer</th>
                 <th>Publisher</th>
                 <th>Release Date</th>
+                <th></th>
             </tr>
             {% for g in games %}
             <tr style="text-align: center" data-href="{% url 'levelcheck:game_detail' g.title%}">
@@ -20,6 +21,7 @@
                 <td style="width: 5%">{{ g.developer }}</td>
                 <td style="width: 5%">{{ g.publisher }}</td>
                 <td style="width: 5%">{{ g.release }}</td>
+                <td style="width: 5%"><a style="padding: 3%" class="link_button">Delete</a></td>
             </tr>
             {% empty %}
                 <p>No games :(</p>

@@ -17,9 +17,11 @@
     </div>
     <h1 id="greeting">WELCOME {{request.user.username}}!</h1>
     <div style="display: flex">
-        <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
-        <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_genre' %}">CREATE GENRE</a>
-        <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_character' %}">CREATE CHARACTER</a>
+        {% if request.user.is_superuser %}
+            <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
+            <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_genre' %}">CREATE GENRE</a>
+            <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_character' %}">CREATE CHARACTER</a>
+        {% endif %}
         <a class="nav_link" style="width: 90px" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
         <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
     </div>
