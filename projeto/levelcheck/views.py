@@ -88,6 +88,12 @@ def character_detail(request, title, name):
 
 
 @login_required(login_url='/levelcheck')
+def review_detail(request, username, id):
+    review = get_object_or_404(Review, pk=id)
+    return render(request, 'levelcheck/review_detail.html', {'review': review})
+
+
+@login_required(login_url='/levelcheck')
 def edit_profile(request, id):
     if request.method == 'POST':
         leveluser = get_object_or_404(LevelUser, pk=id)

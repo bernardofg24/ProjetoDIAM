@@ -1,7 +1,7 @@
 {% extends "levelcheck/index.html" %}
 
 {% block content %}
-    <header style="height: 5%"><h1>GAMES</h1></header>
+    <header style="height: 5%"><h1>REVIEWS</h1></header>
     <section style="height: 94.7%">
         <table>
             <tr>
@@ -14,7 +14,7 @@
                 <th></th>
             </tr>
             {% for r in reviews %}
-            <tr style="text-align: center" data-href="{% url 'levelcheck:logout' %}">
+            <tr style="text-align: center" data-href="{% url 'levelcheck:review_detail' r.user.username r.id %}">
                 <td style="width: 2.5%"><img class="table_image" src="{{ r.game.img.url }}"></td>
                 <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ r.review_title }}</td>
                 <td style="width: 5%">{{ r.game.title }}</td>
@@ -23,7 +23,7 @@
                 <td style="width: 5%"><a style="padding: 3%" class="link_button">Delete</a></td>
             </tr>
             {% empty %}
-                <p>No games :(</p>
+                <p>No reviews :(</p>
             {% endfor %}
         </table>
     </section>
