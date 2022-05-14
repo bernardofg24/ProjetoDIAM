@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/base.css' %}" />
 </head>
 <body>
+<nav>
+    <div style="display: flex">
+        <a style="width: 72.5px">INDEX</a>
+        <a style="width: 115px">RANKINGS</a>
+        <a style="width: 100px" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
+    </div>
+	<p id="greeting">Welcome {{request.user.username}}!</p>
+    <a style="width: 115px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
+</nav>
 
-    <h2>Index</h2>
-
-    <a href="{% url 'levelcheck:profile' user.username %}">Profile</a>
-    <a href="{% url 'levelcheck:logout' %}">Logout</a>
-
+<div id="main">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
 </html>
