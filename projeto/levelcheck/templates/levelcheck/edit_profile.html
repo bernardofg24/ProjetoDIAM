@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile!</title>
+</head>
+<body>
+
+    <h2>Profile</h2>
+
+    <form action="{% url 'levelcheck:edit_profile' user.leveluser.id%}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Username: {{request.user.username}}</p>
+    <p>Joined: {{request.user.leveluser.joined}}</p>
+    <p>Gender:</p>
+    <input type="radio" id="male" name="gender" value="Male">
+    <label for="male">Male</label><br>
+    <input type="radio" id="Female" name="gender" value="Female">
+    <label for="female">Female</label><br>
+    <input type="radio" id="non_binary" name="gender" value="Non-Binary">
+    <label for="non_binary">Non-Binary</label><br>
+    <input type="radio" id="prefer_not" name="gender" value="Prefer Not" checked>
+    <label for="prefer_not">Prefer Not</label><br>
+    <label for="birthday">Birthday:</label>
+    <input type="date" id="birthday" name="birthday" value="{{request.user.leveluser.birthday}}"><br>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" value="{{request.user.leveluser.location}}"required><br>
+    {% load static %}
+    <img src="{% static request.user.leveluser.img_src %}"><br>
+    <label for="photo_label">Upload Photo:</label>
+    <input type="file" id="photo_label" name="photo"><br><br>
+    <label for="bio">Bio:</label>
+    <input type="text" id="bio" name="bio" value="{{request.user.leveluser.bio}}"><br><br>
+    <input type="submit" value="Save">
+    </form>
+    <button><a href="{% url 'levelcheck:profile' user.username%}">Cancel</a></button>
+
+    <h2>Game Stats</h2>
+    <p>Playing: {{request.user.leveluser.userstats.playing}}</p>
+    <p>Completed: {{request.user.leveluser.userstats.completed}}</p>
+    <p>On-Hold: {{request.user.leveluser.userstats.on_hold}}</p>
+    <p>Dropped: {{request.user.leveluser.userstats.dropped}}</p>
+    <p>Plan to Play: {{request.user.leveluser.userstats.plan_to_play}}</p>
+    <p>Total: {{request.user.leveluser.userstats.total}}</p>
+
+</body>
+</html>

@@ -13,4 +13,5 @@ urlpatterns = [
     path('createacc', views.create_acc, name='create_acc'),
     path('index', views.index, name='index'),
     path('profile/<str:username>', views.profile, name='profile'),
+    path('editprofile/<int:id>', views.edit_profile, name='edit_profile'),
 ]

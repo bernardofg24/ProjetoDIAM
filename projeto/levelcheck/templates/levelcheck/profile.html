@@ -14,7 +14,17 @@
     <p>Birthday: {{request.user.leveluser.birthday}}</p>
     <p>Location: {{request.user.leveluser.location}}</p>
     {% load static %}
-    <img src="{% static request.user.leveluser.img_src %}"><br><br>
+    <img src="{% static request.user.leveluser.img_src %}">
+    <p>Bio: {{request.user.leveluser.bio}}</p><br><br>
 
+    <h2>Game Stats</h2>
+    <p>Playing: {{request.user.leveluser.userstats.playing}}</p>
+    <p>Completed: {{request.user.leveluser.userstats.completed}}</p>
+    <p>On-Hold: {{request.user.leveluser.userstats.on_hold}}</p>
+    <p>Dropped: {{request.user.leveluser.userstats.dropped}}</p>
+    <p>Plan to Play: {{request.user.leveluser.userstats.plan_to_play}}</p>
+    <p>Total: {{request.user.leveluser.userstats.total}}</p>
+
+    <button><a href="{% url 'levelcheck:edit_profile' user.leveluser.id%}">Edit Profile</a></button>
 </body>
 </html>

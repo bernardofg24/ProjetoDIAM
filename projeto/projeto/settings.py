@@ -126,4 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # MEDIA
 
 MEDIA_URL = '/levelcheck/static/website/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'votacao/static/website/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'levelcheck/static/website/images')

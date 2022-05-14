@@ -69,3 +69,42 @@ def index(request):
 @login_required(login_url='/levelcheck')
 def profile(request, username):
     return render(request, 'levelcheck/profile.html', {'username': username})
+
+
+@login_required(login_url='/levelcheck')
+def edit_profile(request, id):
+    if request.method == 'POST':
+        leveluser = get_object_or_404(LevelUser, pk=id)
+        username = leveluser.user.username
+
+        if request.POST["gender"]:
+            gender = request.POST["gender"]
+        else:
+            gender = leveluser.gender
+
+        birthday = request.POST["birthday"]
+        location = request.POST["location"]
+        bio = request.POST["bio"]
+
+        photo_filepath = request.FILES.get("photo", None)
+
+        if photo_filepath is not None:
+            src = request.FILES["photo"]
+            fs = FileSystemStorage()
+            filename = fs.save(src.name, src)
+            uploaded_file_url_full = fs.url(filename)
+            uploaded_file_url = uploaded_file_url_full.split("/", 3)[3]
+            uploaded_file_url = "/" + uploaded_file_url
+        else:
+            uploaded_file_url = leveluser.img_src
+
+        leveluser.gender = gender
+        leveluser.birthday = birthday
+        leveluser.location = location
+        leveluser.bio = bio
+        leveluser.img_src = uploaded_file_url
+
+        leveluser.save(update_fields=["gender", "birthday", "location", "bio", "img_src"])
+        return HttpResponseRedirect(reverse('levelcheck:profile', args=username))
+    else:
+        return render(request, 'levelcheck/edit_profile.html')
