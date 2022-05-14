@@ -11,7 +11,7 @@
 			    <th>Game</th>
             </tr>
             {% for c in characters %}
-            <tr style="text-align: center" data-href="{% url 'levelcheck:logout' %}">
+            <tr style="text-align: center" data-href="{% url 'levelcheck:character_detail' c.game.title c.name%}">
                 <td style="width: 1.5%"><img class="table_image" src="{{ c.img.url }}"></td>
                 <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ c.name }}</td>
                 <td style="width: 5%">{{ c.age }}</td>

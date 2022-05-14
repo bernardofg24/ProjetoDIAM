@@ -20,4 +20,5 @@ urlpatterns = [
     path('profile/<str:username>', views.profile, name='profile'),
     path('editprofile/<int:id>', views.edit_profile, name='edit_profile'),
     path('<str:title>', views.game_detail, name='game_detail'),
+    path('<str:title>/<str:name>', views.character_detail, name='character_detail'),
 ]
