@@ -14,7 +14,7 @@
             </tr>
             {% for g in games %}
             <tr data-href="{% url 'levelcheck:logout' %}">
-                <td style="width: 5%; text-align: center"><img class="game_image" src="{{ g.img.url }}"></td>
+                <td style="width: 2.5%; text-align: center"><img class="table_image" src="{{ g.img.url }}"></td>
                 <td style="width: 5%; text-align: center; font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
                 <td style="width: 5%; text-align: center">{{ g.genre_id }}</td>
                 <td style="width: 5%; text-align: center">{{ g.developer }}</td>

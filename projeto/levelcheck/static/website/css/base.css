@@ -209,7 +209,8 @@ section{
 	align-items: center;
 }
 
-.game_image{
-	max-width: 40%;
-	max-height: 30%;
+.table_image{
+	max-width: 75%;
+	margin: 0;
+	padding: 0;
 }

@@ -1,17 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All Characters</title>
-</head>
-<body>
-    {% for c in characters %}
-    <h4>{{ c.name }}</h4>
-    <h2>{{ c.age }}</h2>
-    <p>{{ c.game.title }}</p>
-    <img src="{{ c.img.url }}">
-    {% empty %}
-    <p>No characters :(</p>
-    {% endfor %}
-</body>
-</html>
+{% extends "levelcheck/index.html" %}
+
+{% block content %}
+    <header style="height: 5%"><h1>GAMES</h1></header>
+    <section style="height: 94.7%">
+        <table>
+            <tr>
+                <th></th>
+			    <th>Name</th>
+			    <th>Age</th>
+			    <th>Game</th>
+            </tr>
+            {% for c in characters %}
+            <tr data-href="{% url 'levelcheck:logout' %}">
+                <td style="width: 1.5%; text-align: center"><img class="table_image" src="{{ c.img.url }}"></td>
+                <td style="width: 5%; text-align: center; font-weight: bold; font-size: 1.5em">{{ c.name }}</td>
+                <td style="width: 5%; text-align: center">{{ c.age }}</td>
+                <td style="width: 5%; text-align: center">{{ c.game.title }}</td>
+            </tr>
+            {% empty %}
+                <p>No characters :(</p>
+            {% endfor %}
+        </table>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+
+            rows.forEach(row => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+{% endblock %}
