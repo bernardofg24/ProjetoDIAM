@@ -141,6 +141,11 @@ def review_detail(request, username, id):
 @login_required(login_url='/levelcheck')
 def user_detail(request, id):
     profile_owner = get_object_or_404(LevelUser, pk=id)
+    if request.user.id == profile_owner.user.id:
+        url = reverse('levelcheck:profile', kwargs={'username': request.user.username})
+        return HttpResponseRedirect(url)
+    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner})
+
     usergames = UserGames.objects.filter(user_id=profile_owner.user.id)
     games = Game.objects.none()
     games_list = list()
