@@ -202,6 +202,13 @@ def create_review(request, title):
 
 
 @login_required(login_url='/levelcheck')
+def delete_review(request, game_id):
+    review = Review.objects.get(game_id=game_id, user_id=request.user.id)
+    review.delete()
+    return HttpResponseRedirect(reverse('levelcheck:all_reviews'))
+
+
+@login_required(login_url='/levelcheck')
 def all_games(request):
     games = Game.objects.all().order_by('-release')
     return render(request, 'levelcheck/all_games.html', context={'games': games})
