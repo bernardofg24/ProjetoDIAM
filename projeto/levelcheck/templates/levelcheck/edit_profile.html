@@ -1,47 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your Profile!</title>
-</head>
-<body>
+{% extends "levelcheck/profile.html" %}
 
-    <h2>Profile</h2>
+{% block profile %}
+    <div id="profile_desc">
+        <p><span>Username:</span>  {{request.user.username}}</p><br>
+        <p><span>Joined:</span>  {{request.user.leveluser.joined}}</p><br>
+        <form action="{% url 'levelcheck:edit_profile' user.leveluser.id%}" method="post" enctype="multipart/form-data">
+            <div style="margin-bottom: 5%">
+                {% csrf_token %}
+                <label style="display: inline" for="photo_label">Upload Photo:</label>
+                <input type="file" id="photo_label" name="photo"><br>
 
-    <form action="{% url 'levelcheck:edit_profile' user.leveluser.id%}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>Username: {{request.user.username}}</p>
-    <p>Joined: {{request.user.leveluser.joined}}</p>
-    <p>Gender:</p>
-    <input type="radio" id="male" name="gender" value="Male">
-    <label for="male">Male</label><br>
-    <input type="radio" id="Female" name="gender" value="Female">
-    <label for="female">Female</label><br>
-    <input type="radio" id="non_binary" name="gender" value="Non-Binary">
-    <label for="non_binary">Non-Binary</label><br>
-    <input type="radio" id="prefer_not" name="gender" value="Prefer Not" checked>
-    <label for="prefer_not">Prefer Not</label><br>
-    <label for="birthday">Birthday:</label>
-    <input type="date" id="birthday" name="birthday" value="{{request.user.leveluser.birthday}}"><br>
-    <label for="location">Location:</label>
-    <input type="text" id="location" name="location" value="{{request.user.leveluser.location}}"required><br>
-    {% load static %}
-    <img src="{% static request.user.leveluser.img_src %}"><br>
-    <label for="photo_label">Upload Photo:</label>
-    <input type="file" id="photo_label" name="photo"><br><br>
-    <label for="bio">Bio:</label>
-    <input type="text" id="bio" name="bio" value="{{request.user.leveluser.bio}}"><br><br>
-    <input type="submit" value="Save">
-    </form>
-    <button><a href="{% url 'levelcheck:profile' user.username%}">Cancel</a></button>
+                <label style="display: inline" for="gender">Gender:</label>
+                <select name="gender" id="gender">
+                  <option value="" selected disabled hidden>{{request.user.leveluser.gender}}</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Non-Binary">Non-Binary</option>
+                  <option value="Prefer Not">Prefer Not</option>
+                </select><br>
 
-    <h2>Game Stats</h2>
-    <p>Playing: {{request.user.leveluser.userstats.playing}}</p>
-    <p>Completed: {{request.user.leveluser.userstats.completed}}</p>
-    <p>On-Hold: {{request.user.leveluser.userstats.on_hold}}</p>
-    <p>Dropped: {{request.user.leveluser.userstats.dropped}}</p>
-    <p>Plan to Play: {{request.user.leveluser.userstats.plan_to_play}}</p>
-    <p>Total: {{request.user.leveluser.userstats.total}}</p>
+                <label style="display: inline" for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday" value="{{request.user.leveluser.birthday}}"><br>
 
-</body>
-</html>
+                <label style="display: inline" for="location">Location:</label>
+                <input type="text" id="location" name="location" value="{{request.user.leveluser.location}}"required><br>
+
+                <label for="bio">Bio:</label><br>
+                <textarea id="bio" name="bio" rows="5.5">{{request.user.leveluser.bio}}</textarea><br>
+             </div>
+
+            <fieldset style="height: 31%; margin-bottom: 8%">
+                <legend><span>Game Stats</span></legend>
+                <p><span style="color: green">⬤ </span>Playing:  {{request.user.leveluser.userstats.playing}}</p>
+                <p style="margin-top: 5%"><span style="color: midnightblue">⬤ </span>Completed:  {{request.user.leveluser.userstats.completed}}</p>
+                <p style="margin-top: 5%"><span style="color: yellow">⬤ </span>On-Hold:  {{request.user.leveluser.userstats.on_hold}}</p>
+                <p style="margin-top: 5%"><span style="color: darkred">⬤ </span>Dropped:  {{request.user.leveluser.userstats.dropped}}</p>
+                <p style="margin-top: 5%"><span style="color: grey">⬤ </span>Plan to Play:  {{request.user.leveluser.userstats.plan_to_play}}</p>
+                <p style="margin-top: 5%"><span style="color: hotpink">⬤ </span>Total:  {{request.user.leveluser.userstats.total}}</p>
+            </fieldset>
+
+            <input style="width: 30%; padding: 1%; display: inline" class="link_button" type="submit" value="Save">
+            <a style="width: 50%; padding: 1%; padding-left: 5%; padding-right: 5%" class="link_button" href="{% url 'levelcheck:profile' user.username%}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}
