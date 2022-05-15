@@ -13,8 +13,8 @@
         <a class="nav_link" style="width: 85px" href="{% url 'levelcheck:all_games' %}">GAMES</a>
         <a class="nav_link" style="width: 130px" href="{% url 'levelcheck:all_characters' %}">CHARACTERS</a>
         <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:all_reviews' %}">REVIEWS</a>
-        <a class="nav_link" style="width: 135px" href="{% url 'levelcheck:all_games' %}">DISCUSSIONS</a>
-        <a class="nav_link" style="width: 75px" href="{% url 'levelcheck:all_games' %}">USERS</a>
+        <a class="nav_link" style="width: 135px" href="{% url 'levelcheck:all_games' %}">NEWS</a>
+        <a class="nav_link" style="width: 75px" href="{% url 'levelcheck:all_users' %}">USERS</a>
     </div>
     {% if not request.user.is_superuser %}
         <h1 id="greeting">WELCOME {{request.user.username}}!</h1>

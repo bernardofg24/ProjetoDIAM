@@ -286,6 +286,21 @@ def all_reviews(request):
 
 
 @login_required(login_url='/levelcheck')
+def all_users(request):
+    users = User.objects.all().exclude(is_superuser=1).order_by('-last_login')
+    empty = Game.objects.none()
+    levelusers_list = list()
+
+    for u in users:
+        leveluser = LevelUser.objects.get(user_id=u.id)
+        levelusers_list.append(leveluser)
+
+    query_levelusers = list(chain(empty, levelusers_list))
+
+    return render(request, 'levelcheck/all_users.html', context={'levelusers': query_levelusers})
+
+
+@login_required(login_url='/levelcheck')
 def review_feedback_vote(request, review_id, type):
     review = get_object_or_404(Review, id=review_id)
     review_feedback = ReviewFeedback.objects.filter(review_id=review_id, user_id=request.user.id)
