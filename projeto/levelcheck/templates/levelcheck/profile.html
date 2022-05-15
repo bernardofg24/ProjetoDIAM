@@ -1,30 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your Profile!</title>
-</head>
-<body>
+{% extends "levelcheck/index.html" %}
 
-    <h2>Profile</h2>
+{% block content %}
+    <aside>
+        {% load static %}
+        <img id="profile_pic" src="{% static request.user.leveluser.img_src %}">
+        <div id="profile_desc">
+            <p><span>Username:</span> {{request.user.username}}</p><br>
+            <p><span>Joined:</span> {{request.user.leveluser.joined}}</p><br>
+            <p><span>Gender:</span> {{request.user.leveluser.gender}}</p><br>
+            <p><span>Birthday:</span> {{request.user.leveluser.birthday}}</p><br>
+            <p><span>Location:</span> {{request.user.leveluser.location}}</p><br>
+            <p><span>Bio:</span> {{request.user.leveluser.bio}}</p><br>
 
-    <p>Username: {{request.user.username}}</p>
-    <p>Joined: {{request.user.leveluser.joined}}</p>
-    <p>Gender: {{request.user.leveluser.gender}}</p>
-    <p>Birthday: {{request.user.leveluser.birthday}}</p>
-    <p>Location: {{request.user.leveluser.location}}</p>
-    {% load static %}
-    <img src="{% static request.user.leveluser.img_src %}">
-    <p>Bio: {{request.user.leveluser.bio}}</p><br><br>
+            <fieldset>
+                <legend><span>Game Stats</span></legend>
+                <p><span>Playing:</span> {{request.user.leveluser.userstats.playing}}</p>
+                <p><span>Completed:</span> {{request.user.leveluser.userstats.completed}}</p>
+                <p><span>On-Hold:</span> {{request.user.leveluser.userstats.on_hold}}</p>
+                <p><span>Dropped:</span> {{request.user.leveluser.userstats.dropped}}</p>
+                <p><span>Plan to Play:</span> {{request.user.leveluser.userstats.plan_to_play}}</p>
+                <p><span>Total:</span> {{request.user.leveluser.userstats.total}}</p>
+            </fieldset>
+            <br>
+            <a style="padding: 2%" class="link_button" href="{% url 'levelcheck:edit_profile' user.leveluser.id%}">Edit Profile</a>
+        </div>
+    </aside>
 
-    <h2>Game Stats</h2>
-    <p>Playing: {{request.user.leveluser.userstats.playing}}</p>
-    <p>Completed: {{request.user.leveluser.userstats.completed}}</p>
-    <p>On-Hold: {{request.user.leveluser.userstats.on_hold}}</p>
-    <p>Dropped: {{request.user.leveluser.userstats.dropped}}</p>
-    <p>Plan to Play: {{request.user.leveluser.userstats.plan_to_play}}</p>
-    <p>Total: {{request.user.leveluser.userstats.total}}</p>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
 
-    <button><a href="{% url 'levelcheck:edit_profile' user.leveluser.id%}">Edit Profile</a></button>
-</body>
-</html>
+            rows.forEach(row => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+{% endblock %}
