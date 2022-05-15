@@ -12,10 +12,12 @@
 {% block detail %}
     <section></section>
     <div style="margin: auto; width: 30%; text-align: center">
-        {% if relation.type == 'D' or relation == 'E' %}
-        <a style="padding-right: 2%; padding-left: 2%; margin-right: 2%" class="link_button" href="{% url 'levelcheck:user_characters_favourites' game.title character.name %}">Favourite</a>
-        {% else %}
-        <a style="padding-right: 2%; padding-left: 2%; margin-left: 2%" class="link_button" href="{% url 'levelcheck:user_characters_favourites' game.title character.name %}">Unfavourite</a>
+        {% if not request.user.is_superuser %}
+            {% if relation.type == 'D' or relation == 'E' %}
+            <a style="padding-right: 2%; padding-left: 2%; margin-right: 2%" class="link_button" href="{% url 'levelcheck:user_characters_favourites' game.title character.name %}">Favourite</a>
+            {% else %}
+            <a style="padding-right: 2%; padding-left: 2%; margin-left: 2%" class="link_button" href="{% url 'levelcheck:user_characters_favourites' game.title character.name %}">Unfavourite</a>
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}

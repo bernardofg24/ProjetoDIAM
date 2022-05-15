@@ -2,7 +2,7 @@
 
 {% block content %}
     <fieldset style="margin: auto; width: 75%; height: 75%">
-        <legend>{{review.review_title}}</legend>
+        <legend><span>{{review.review_title}}</span></legend>
         <div style="display: flex; gap: 2%">
             <p><span>For:</span>  {{review.game_id}}</p>
             <p><span>By:</span>  {{review.user.username}}</p>
@@ -17,7 +17,7 @@
         <div style="gap: 2%" class="section_button">
             {% if request.user == review.user %}
                 <a style="width: 6%; height: 30%" class="link_button" href="{% url 'levelcheck:delete_review' review.game_id%}">Delete</a>
-            {% else %}
+            {% elif not request.user.is_superuser %}
                 <a style="width: 5%; height: 30%" class="link_button" href="{% url 'levelcheck:review_feedback_vote' review.id "L" %}">Like</a>
                 <a style="width: 6%; height: 30%" class="link_button" href="{% url 'levelcheck:review_feedback_vote' review.id "D" %}">Dislike</a>
             {% endif %}
