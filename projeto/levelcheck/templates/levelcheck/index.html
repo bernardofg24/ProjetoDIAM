@@ -8,25 +8,26 @@
 </head>
 <body>
 <nav>
-    <div style="display: flex; height: 98%">
+    <div style="display: flex; height: 100%">
         <a class="nav_link" style="width: 75px" href="{% url 'levelcheck:index' %}">INDEX</a>
         <a class="nav_link" style="width: 85px" href="{% url 'levelcheck:all_games' %}">GAMES</a>
         <a class="nav_link" style="width: 130px" href="{% url 'levelcheck:all_characters' %}">CHARACTERS</a>
         <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:all_reviews' %}">REVIEWS</a>
         <a class="nav_link" style="width: 135px" href="{% url 'levelcheck:all_games' %}">DISCUSSIONS</a>
+        <a class="nav_link" style="width: 75px" href="{% url 'levelcheck:all_games' %}">USERS</a>
     </div>
     {% if not request.user.is_superuser %}
         <h1 id="greeting">WELCOME {{request.user.username}}!</h1>
     {% endif %}
     {% if request.user.is_superuser %}
-        <div style="display: flex; height: 93%">
-            <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
-            <a class="nav_link" style="width: 145px" href="{% url 'levelcheck:create_genre' %}">CREATE GENRE</a>
-            <a class="nav_link" style="width: 190px" href="{% url 'levelcheck:create_character' %}">CREATE CHARACTER</a>
-            <a class="nav_link" style="width: 90px" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
+        <div style="display: flex; height: 100%">
+            <a class="nav_link" style="width: 140px; padding-top: 2.75%" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
+            <a class="nav_link" style="width: 145px; padding-top: 2.75%" href="{% url 'levelcheck:create_genre' %}">CREATE GENRE</a>
+            <a class="nav_link" style="width: 190px; padding-top: 2.75%" href="{% url 'levelcheck:create_character' %}">CREATE CHARACTER</a>
+            <a class="nav_link" style="width: 90px; padding-top: 2.75%" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
         </div>
     {% else %}
-        <div style="display: flex; height: 95%">
+        <div style="display: flex; height: 98%">
             <a class="nav_link" style="width: 90px; padding-top: 9%" href="{% url 'levelcheck:profile' user.username %}">PROFILE</a>
             <a class="nav_link" style="width: 90px; padding-top: 9%" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
         </div>
