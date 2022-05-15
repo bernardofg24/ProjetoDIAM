@@ -9,7 +9,9 @@
 			    <th>Name</th>
 			    <th>Age</th>
 			    <th>Game</th>
-                <th></th>
+                {% if request.user.is_superuser %}
+                    <th></th>
+                {% endif %}
             </tr>
             {% for c in characters %}
             <tr style="text-align: center" data-href="{% url 'levelcheck:character_detail' c.game.title c.name%}">
@@ -17,7 +19,9 @@
                 <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ c.name }}</td>
                 <td style="width: 5%">{{ c.age }}</td>
                 <td style="width: 5%">{{ c.game.title }}</td>
-                <td style="width: 5%"><a style="padding: 2%" class="link_button" href="{% url 'levelcheck:delete_character' c.game.title c.name %}">Delete</a></td>
+                {% if request.user.is_superuser %}
+                    <td style="width: 5%"><a style="padding: 2%" class="link_button" href="{% url 'levelcheck:delete_character' c.game.title c.name %}">Delete</a></td>
+                {% endif %}
             </tr>
             {% empty %}
                 <p>No characters :(</p>
