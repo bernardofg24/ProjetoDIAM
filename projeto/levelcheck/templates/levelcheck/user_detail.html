@@ -21,11 +21,14 @@
                 <p style="margin-top: 5%"><span style="color: grey">⬤ </span>Plan to Play:  {{f}}</p>
                 <p style="margin-top: 10%">Total:  {{t}}</p>
             </fieldset>
+            <br>
             {% block edit %}
-                {% if relation.type == 'U' or relation == 'E' %}
-                <a style="padding-right: 2%; padding-left: 2%; margin-left: 2%" class="link_button" href="{% url 'levelcheck:follower_followed' owner.id %}">Follow</a>
-                {% else %}
-                <a style="padding-right: 2%; padding-left: 2%; margin-left: 2%" class="link_button" href="{% url 'levelcheck:follower_followed' owner.id %}">Unfollow</a>
+                {% if not request.user.is_superuser %}
+                    {% if relation.type == 'U' or relation == 'E' %}
+                    <a style="padding: 3%" class="link_button" href="{% url 'levelcheck:follower_followed' owner.id %}">Follow</a>
+                    {% else %}
+                    <a style="padding: 3%" class="link_button" href="{% url 'levelcheck:follower_followed' owner.id %}">Unfollow</a>
+                    {% endif %}
                 {% endif %}
             {% endblock %}
         </div>
