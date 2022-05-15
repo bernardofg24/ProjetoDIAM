@@ -13,16 +13,18 @@
         <p><span>Publisher:</span>  {{game.publisher}}</p><br>
         <p><span>Release Date:</span></p>
         <p>{{game.release}}</p><br>
-        <div class="dropdown">
-        <button class="dropbtn">Set Status</button>
-        <div class="dropdown-content">
-            <a href="{% url 'levelcheck:user_games_stats' game.title "P" %}">Playing</a>
-            <a href="{% url 'levelcheck:user_games_stats' game.title "C" %}">Completed</a>
-            <a href="{% url 'levelcheck:user_games_stats' game.title "H" %}">On-Hold</a>
-            <a href="{% url 'levelcheck:user_games_stats' game.title "D" %}">Dropped</a>
-            <a href="{% url 'levelcheck:user_games_stats' game.title "F" %}">Plan to Play</a>
-        </div>
-    </div>
+        {% if not request.user.is_superuser %}
+            <div class="dropdown">
+            <button class="dropbtn">Set Status</button>
+            <div class="dropdown-content">
+                <a href="{% url 'levelcheck:user_games_stats' game.title "P" %}">Playing</a>
+                <a href="{% url 'levelcheck:user_games_stats' game.title "C" %}">Completed</a>
+                <a href="{% url 'levelcheck:user_games_stats' game.title "H" %}">On-Hold</a>
+                <a href="{% url 'levelcheck:user_games_stats' game.title "D" %}">Dropped</a>
+                <a href="{% url 'levelcheck:user_games_stats' game.title "F" %}">Plan to Play</a>
+            </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -51,6 +53,8 @@
         </table>
     </section>
     <div style="height: 7%" class="section_button">
-        <a style="width: 7.5%" class="link_button" href="{% url 'levelcheck:create_review' game.title%}">Add Review</a>
+        {% if not request.user.is_superuser %}
+            <a style="width: 7.5%" class="link_button" href="{% url 'levelcheck:create_review' game.title%}">Add Review</a>
+        {% endif %}
     </div>
 {% endblock %}
