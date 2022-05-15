@@ -6,9 +6,9 @@
 </head>
 <body>
     <p>{{ review.text }}</p>
-    <button><a href="{% url 'levelcheck:review_feedback_like' review.id %}">Like</a></button>
+    <button><a href="{% url 'levelcheck:review_feedback_vote' review.id "L" %}">Like</a></button>
     <p>{{ likes }}</p>
-    <button><a href="{% url 'levelcheck:review_feedback_dislike' review.id %}">Dislike</a></button>
+    <button><a href="{% url 'levelcheck:review_feedback_vote' review.id "D" %}">Dislike</a></button>
     <p>{{ dislikes }}</p>
 </body>
 </html>
