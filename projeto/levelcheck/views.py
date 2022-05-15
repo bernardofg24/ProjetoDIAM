@@ -100,7 +100,17 @@ def profile(request, username):
     plan = usergames.filter(type='F').count()
     total = playing + completed + hold + dropped + plan
 
-    return render(request, 'levelcheck/profile.html', {'username': username, 'games': query_games, 'characters': query_characters, 'reviews': reviews, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
+    userfollows = UserFollowers.objects.filter(follower_id=request.user.id)
+    follows = LevelUser.objects.none()
+    follows_list = list()
+
+    for u in userfollows:
+        follow = LevelUser.objects.get(user_id=u.followed_id)
+        follows_list.append(follow)
+
+    query_follows = list(chain(follows, follows_list))
+
+    return render(request, 'levelcheck/profile.html', {'username': username, 'games': query_games, 'characters': query_characters, 'reviews': reviews, 'follows': query_follows, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')
@@ -131,10 +141,46 @@ def review_detail(request, username, id):
 @login_required(login_url='/levelcheck')
 def user_detail(request, id):
     profile_owner = get_object_or_404(LevelUser, pk=id)
-    if request.user.id == profile_owner.user.id:
-        url = reverse('levelcheck:profile', kwargs={'username': request.user.username})
-        return HttpResponseRedirect(url)
-    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner})
+    usergames = UserGames.objects.filter(user_id=profile_owner.user.id)
+    games = Game.objects.none()
+    games_list = list()
+
+    for u in usergames:
+        game = Game.objects.get(pk=u.game_id)
+        games_list.append(game)
+
+    query_games = list(chain(games, games_list))
+
+    usercharacters = UserCharacters.objects.filter(user_id=profile_owner.user.id, type='F')
+    characters = Character.objects.none()
+    characters_list = list()
+
+    for u in usercharacters:
+        character = Character.objects.get(pk=u.character_id)
+        characters_list.append(character)
+
+    query_characters = list(chain(characters, characters_list))
+
+    reviews = Review.objects.filter(user_id=profile_owner.user.id)
+
+    playing = usergames.filter(type='P').count()
+    completed = usergames.filter(type='C').count()
+    hold = usergames.filter(type='H').count()
+    dropped = usergames.filter(type='D').count()
+    plan = usergames.filter(type='F').count()
+    total = playing + completed + hold + dropped + plan
+
+    userfollows = UserFollowers.objects.filter(follower_id=profile_owner.user.id)
+    follows = LevelUser.objects.none()
+    follows_list = list()
+
+    for u in userfollows:
+        follow = LevelUser.objects.get(user_id=u.followed_id)
+        follows_list.append(follow)
+
+    query_follows = list(chain(follows, follows_list))
+
+    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner, 'games': query_games, 'characters': query_characters, 'reviews': reviews, 'follows': query_follows, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')
@@ -203,7 +249,17 @@ def edit_profile(request, id):
         plan = usergames.filter(type='F').count()
         total = playing + completed + hold + dropped + plan
 
-        return render(request, 'levelcheck/edit_profile.html', {'games': query_games, 'characters': query_characters, 'reviews': reviews, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
+        userfollows = UserFollowers.objects.filter(follower_id=request.user.id)
+        follows = LevelUser.objects.none()
+        follows_list = list()
+
+        for u in userfollows:
+            follow = LevelUser.objects.get(user_id=u.followed_id)
+            follows_list.append(follow)
+
+        query_follows = list(chain(follows, follows_list))
+
+        return render(request, 'levelcheck/edit_profile.html', {'games': query_games, 'characters': query_characters, 'reviews': reviews, 'follows': query_follows, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')
@@ -312,7 +368,7 @@ def all_reviews(request):
 
 @login_required(login_url='/levelcheck')
 def all_users(request):
-    users = User.objects.all().exclude(is_superuser=1).order_by('-last_login')
+    users = User.objects.all().exclude(is_superuser=1).exclude(id=request.user.id).order_by('-last_login')
     empty = Game.objects.none()
     levelusers_list = list()
 
