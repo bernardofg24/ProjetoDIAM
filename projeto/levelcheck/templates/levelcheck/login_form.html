@@ -19,21 +19,20 @@
                 <input type="password" id="password" name="password"><br>
                 <input type="submit" value="Login"><br><br>
                 <a href="{% url 'levelcheck:create_acc' %}">Don't have an account? Sign up now!</a>
+                {% if err_creds %}
+                    <p><strong>{{ err_creds }}</strong></p>
+                {% endif %}
+
+                {% if err_dupe %}
+                    <p><strong>{{ err_dupe }}</strong></p>
+                {% endif %}
+
+                {% if print_conta_criada %}
+                    <p><strong>{{ print_conta_criada }}</strong></p>
+                {% endif %}
             </fieldset>
         </form>
     </div>
     {% endblock %}
-
-    {% if err_creds %}
-        <p><strong>{{ err_creds }}</strong></p>
-    {% endif %}
-
-    {% if err_dupe %}
-        <p><strong>{{ err_dupe }}</strong></p>
-    {% endif %}
-
-    {% if print_conta_criada %}
-        <p><strong>{{ print_conta_criada }}</strong></p>
-    {% endif %}
 </body>
 </html>
