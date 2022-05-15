@@ -114,7 +114,10 @@ def game_detail(request, title):
 def character_detail(request, title, name):
     game = get_object_or_404(Game, pk=title)
     character = get_object_or_404(Character, name=name, game=game)
-    return render(request, 'levelcheck/character_detail.html', {'game': game, 'character': character})
+    character_relation = UserCharacters.objects.filter(user_id=request.user.id, character_id=character.id)
+    if not character_relation:
+        character_relation = 'E'
+    return render(request, 'levelcheck/character_detail.html', {'game': game, 'character': character, 'relation': character_relation})
 
 
 @login_required(login_url='/levelcheck')
