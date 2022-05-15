@@ -2,7 +2,7 @@
 
 {% block form %}
 <div id="signup">
-    <form action="{% url 'levelcheck:create_acc' %}" method="post">
+    <form action="{% url 'levelcheck:create_acc' %}" method="post" autocomplete="off">
         {% csrf_token %}
         <fieldset id="signup_fs">
             <legend>LevelCheck</legend>

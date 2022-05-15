@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <form style="margin: auto; width: 75%; height: 75%" action="{% url 'levelcheck:create_review' game.title%}" method="post">
+    <form style="margin: auto; width: 75%; height: 75%" action="{% url 'levelcheck:create_review' game.title%}" method="post" autocomplete="off">
         {% csrf_token %}
         <fieldset style="width: 100%; height: 98%; padding-top: 2%">
             <label style="margin: 0; margin-left: 5%" for="username">By:</label>
