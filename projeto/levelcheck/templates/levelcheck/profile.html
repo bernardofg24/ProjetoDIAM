@@ -2,168 +2,172 @@
 
 {% block content %}
     <aside>
-        {% load static %}
-        <img id="profile_pic" src="{% static request.user.leveluser.img_src %}">
-        {% block profile %}
-        <div id="profile_desc">
-            <p><span>Username:</span>  {{request.user.username}}</p><br>
-            <p><span>Joined:</span>  {{request.user.leveluser.joined}}</p><br>
-            <p><span>Gender:</span>  {{request.user.leveluser.gender}}</p><br>
-            <p><span>Birthday:</span>  {{request.user.leveluser.birthday}}</p><br>
-            <p><span>Location:</span>  {{request.user.leveluser.location}}</p><br>
-            <p style="max-height: 21%; overflow: auto"><span>Bio:</span>  {{request.user.leveluser.bio}}</p><br>
+        {% block character %}
+            {% load static %}
+            <img id="profile_pic" src="{% static request.user.leveluser.img_src %}">
+            {% block profile %}
+                <div id="profile_desc">
+                    <p><span>Username:</span>  {{request.user.username}}</p><br>
+                    <p><span>Joined:</span>  {{request.user.leveluser.joined}}</p><br>
+                    <p><span>Gender:</span>  {{request.user.leveluser.gender}}</p><br>
+                    <p><span>Birthday:</span>  {{request.user.leveluser.birthday}}</p><br>
+                    <p><span>Location:</span>  {{request.user.leveluser.location}}</p><br>
+                    <p style="max-height: 21%; overflow: auto"><span>Bio:</span>  {{request.user.leveluser.bio}}</p><br>
 
-            <fieldset>
-                <legend><span>Game Stats</span></legend>
-                <p style="margin-top: 5%"><span style="color: #240090">⬤ </span>Playing:  {{p}}</p>
-                <p style="margin-top: 5%"><span style="color: green">⬤ </span>Completed:  {{c}}</p>
-                <p style="margin-top: 5%"><span style="color: yellow">⬤ </span>On-Hold:  {{h}}</p>
-                <p style="margin-top: 5%"><span style="color: darkred">⬤ </span>Dropped:  {{d}}</p>
-                <p style="margin-top: 5%"><span style="color: grey">⬤ </span>Plan to Play:  {{f}}</p>
-                <p style="margin-top: 10%">Total:  {{t}}</p>
-            </fieldset>
-            <br>
-            <a style="padding: 2%" class="link_button" href="{% url 'levelcheck:edit_profile' user.leveluser.id%}">Edit Profile</a>
-        </div>
+                    <fieldset>
+                        <legend><span>Game Stats</span></legend>
+                        <p style="margin-top: 5%"><span style="color: #240090">⬤ </span>Playing:  {{p}}</p>
+                        <p style="margin-top: 5%"><span style="color: green">⬤ </span>Completed:  {{c}}</p>
+                        <p style="margin-top: 5%"><span style="color: yellow">⬤ </span>On-Hold:  {{h}}</p>
+                        <p style="margin-top: 5%"><span style="color: darkred">⬤ </span>Dropped:  {{d}}</p>
+                        <p style="margin-top: 5%"><span style="color: grey">⬤ </span>Plan to Play:  {{f}}</p>
+                        <p style="margin-top: 10%">Total:  {{t}}</p>
+                    </fieldset>
+                    <br>
+                    <a style="padding: 2%" class="link_button" href="{% url 'levelcheck:edit_profile' user.leveluser.id%}">Edit Profile</a>
+                </div>
+            {% endblock %}
         {% endblock %}
     </aside>
 
-    <div id="profile_main">
-        <div style="width: 50%; height: 50%" id="top_left">
-            <header><h1>GAMES</h1></header>
-            <section style="height: 90%">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Title</th>
-                    </tr>
-                    {% for g in games %}
-                        {% for u in usergames %}
-                            {% if u.game_id == g.title %}
-                                {% if u.type == 'P' %}
-                                    <tr style="text-align: center; background-color: rgba(36,0,144,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
-                                        <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
-                                        <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
-                                    </tr>
-                                {% elif u.type == 'C' %}
-                                    <tr style="text-align: center; background-color: rgba(0,128,0,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
-                                        <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
-                                        <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
-                                    </tr>
-                                {% elif u.type == 'H' %}
-                                    <tr style="text-align: center; background-color: rgba(255,255,153,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
-                                        <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
-                                        <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
-                                    </tr>
-                                {% elif u.type == 'D' %}
-                                    <tr style="text-align: center; background-color: rgba(139,0,0,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
-                                        <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
-                                        <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
-                                    </tr>
-                                {% elif u.type == 'F' %}
-                                    <tr style="text-align: center; background-color: rgba(128,128,128,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
-                                        <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
-                                        <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
-                                    </tr>
+    {% block detail %}
+        <div id="profile_main">
+            <div style="width: 50%; height: 50%" id="top_left">
+                <header><h1>GAMES</h1></header>
+                <section style="height: 90%">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                        </tr>
+                        {% for g in games %}
+                            {% for u in usergames %}
+                                {% if u.game_id == g.title %}
+                                    {% if u.type == 'P' %}
+                                        <tr style="text-align: center; background-color: rgba(36,0,144,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
+                                            <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
+                                            <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
+                                        </tr>
+                                    {% elif u.type == 'C' %}
+                                        <tr style="text-align: center; background-color: rgba(0,128,0,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
+                                            <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
+                                            <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
+                                        </tr>
+                                    {% elif u.type == 'H' %}
+                                        <tr style="text-align: center; background-color: rgba(255,255,153,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
+                                            <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
+                                            <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
+                                        </tr>
+                                    {% elif u.type == 'D' %}
+                                        <tr style="text-align: center; background-color: rgba(139,0,0,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
+                                            <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
+                                            <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
+                                        </tr>
+                                    {% elif u.type == 'F' %}
+                                        <tr style="text-align: center; background-color: rgba(128,128,128,0.33)" data-href="{% url 'levelcheck:game_detail' g.title %}">
+                                            <td style="width: 15%"><img class="table_image" src="{{ g.img.url }}"></td>
+                                            <td style="font-weight: bold; font-size: 1.5em">{{ g.title }}</td>
+                                        </tr>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
+                            {% endfor %}
+                        {% empty %}
+                            <tr style="text-align: center">
+                                <td></td>
+                                <td style="font-weight: bold; font-size: 1.5em">No games :(</td>
+                            </tr>
                         {% endfor %}
-                    {% empty %}
-                        <tr style="text-align: center">
-                            <td></td>
-                            <td style="font-weight: bold; font-size: 1.5em">No games :(</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </section>
-        </div>
+                    </table>
+                </section>
+            </div>
 
-        <div style="width: 49.8%; height: 50%" id="top_right">
-            <header><h1>FAVOURITE CHARACTERS</h1></header>
-            <section style="height: 90%">
+            <div style="width: 49.8%; height: 50%" id="top_right">
+                <header><h1>FAVOURITE CHARACTERS</h1></header>
+                <section style="height: 90%">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                        </tr>
+                        {% for c in characters %}
+                        <tr style="text-align: center" data-href="{% url 'levelcheck:character_detail' c.game.title c.name%}">
+                            <td style="width: 15%"><img class="table_image" src="{{ c.img.url }}"></td>
+                            <td style="font-weight: bold; font-size: 1.5em">{{ c.name }}</td>
+                        </tr>
+                        {% empty %}
+                            <tr style="text-align: center">
+                                <td></td>
+                                <td style="font-weight: bold; font-size: 1.5em">No characters :(</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </section>
+            </div>
+
+            <div style="width: 50%; height: 49.7%" id="bottom_left">
+                <header><h1>REVIEWS</h1></header>
+                <section style="height: 90%">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                            <th>Game</th>
+                            <th>Rating</th>
+                        </tr>
+                        {% for r in reviews %}
+                        <tr style="text-align: center" data-href="{% url 'levelcheck:review_detail' r.user.username r.id %}">
+                            <td style="width: 1.5%"><img class="table_image" src="{{ r.game.img.url }}"></td>
+                            <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ r.review_title }}</td>
+                            <td style="width: 5%">{{ r.game.title }}</td>
+                            <td style="width: 5%">{{ r.rating }}</td>
+                        </tr>
+                        {% empty %}
+                            <tr style="text-align: center">
+                                <td></td>
+                                <td style="font-weight: bold; font-size: 1.5em">No reviews :(</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </section>
+            </div>
+
+            <div style="width: 49.8%; height: 49.7%" id="bottom_right">
+                <header><h1>DISCUSSIONS</h1></header>
+                <section style="height: 90%">
+
                 <table>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                    </tr>
-                    {% for c in characters %}
-                    <tr style="text-align: center" data-href="{% url 'levelcheck:character_detail' c.game.title c.name%}">
-                        <td style="width: 15%"><img class="table_image" src="{{ c.img.url }}"></td>
-                        <td style="font-weight: bold; font-size: 1.5em">{{ c.name }}</td>
-                    </tr>
-                    {% empty %}
-                        <tr style="text-align: center">
-                            <td></td>
-                            <td style="font-weight: bold; font-size: 1.5em">No characters :(</td>
-                        </tr>
-                    {% endfor %}
+                  <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                  </tr>
+                  <tr>
+                    <td>Berglunds snabbköp</td>
+                    <td>Christina Berglund</td>
+                    <td>Sweden</td>
+                  </tr>
+                  <tr>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td>Mexico</td>
+                  </tr>
+                  <tr>
+                    <td>Ernst Handel</td>
+                    <td>Roland Mendel</td>
+                    <td>Austria</td>
+                  </tr>
+                  <tr>
+                    <td>Island Trading</td>
+                    <td>Helen Bennett</td>
+                    <td>UK</td>
+                  </tr>
                 </table>
             </section>
+            </div>
         </div>
-
-        <div style="width: 50%; height: 49.7%" id="bottom_left">
-            <header><h1>REVIEWS</h1></header>
-            <section style="height: 90%">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Title</th>
-                        <th>Game</th>
-                        <th>Rating</th>
-                    </tr>
-                    {% for r in reviews %}
-                    <tr style="text-align: center" data-href="{% url 'levelcheck:review_detail' r.user.username r.id %}">
-                        <td style="width: 1.5%"><img class="table_image" src="{{ r.game.img.url }}"></td>
-                        <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ r.review_title }}</td>
-                        <td style="width: 5%">{{ r.game.title }}</td>
-                        <td style="width: 5%">{{ r.rating }}</td>
-                    </tr>
-                    {% empty %}
-                        <tr style="text-align: center">
-                            <td></td>
-                            <td style="font-weight: bold; font-size: 1.5em">No reviews :(</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </section>
-        </div>
-
-        <div style="width: 49.8%; height: 49.7%" id="bottom_right">
-            <header><h1>DISCUSSIONS</h1></header>
-            <section style="height: 90%">
-
-            <table>
-              <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Berglunds snabbköp</td>
-                <td>Christina Berglund</td>
-                <td>Sweden</td>
-              </tr>
-              <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-              </tr>
-              <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-              </tr>
-              <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-              </tr>
-            </table>
-        </section>
-        </div>
-    </div>
+    {% endblock %}
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
