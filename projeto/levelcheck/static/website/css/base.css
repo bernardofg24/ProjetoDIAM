@@ -1,5 +1,5 @@
 @font-face {
-  font-family: modern;
+  font-family: detroit;
   src: url("../fonts/nasalization-rg.otf");
 }
 
@@ -8,7 +8,7 @@ html{
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: modern;
+	font-family: detroit;
 }
 
 body{
@@ -68,7 +68,7 @@ nav{
 	flex-wrap: wrap;
 }
 
-h1, h2, p, legend{
+h1, h2, p, legend, label{
 	margin: 0;
 	padding: 0;
 	color: white;
@@ -146,7 +146,7 @@ header{
 	padding-top: 0.3%;
 	margin: 0;
 	margin-bottom: 0.5%;
-	font-family: modern;
+	font-family: detroit;
 	font-size: 1em;
 	cursor: pointer;
 	border-radius: 12px;
@@ -249,7 +249,7 @@ aside{
 	font-size: 0.8em;
 }
 
-span{
+span, label{
 	font-weight: bold;
 	font-size: 1.2em;
 	padding: 0;
@@ -309,3 +309,29 @@ fieldset{
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+input[type=date], input[type=text], select, textarea{
+	border-color: #3500D3;
+	border-style: solid;
+	border-radius: 8px;
+	background-color: rgb(16,16,16);
+	color: white;
+	width: 55%;
+	font-family: detroit;
+	color-scheme: dark;
+	margin: 0;
+	margin-bottom: 5%;
+	padding: 2%;
+	font-size: 0.8em;
+}
+
+textarea{
+	width: 100%;
+	resize: none;
+}
+
+input[type=file]{
+	color: white;
+	font-family: detroit;
+	margin-bottom: 5%;
+}

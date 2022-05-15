@@ -4,6 +4,7 @@
     <aside>
         {% load static %}
         <img id="profile_pic" src="{% static request.user.leveluser.img_src %}">
+        {% block profile %}
         <div id="profile_desc">
             <p><span>Username:</span>  {{request.user.username}}</p><br>
             <p><span>Joined:</span>  {{request.user.leveluser.joined}}</p><br>
@@ -24,6 +25,7 @@
             <br>
             <a style="padding: 2%" class="link_button" href="{% url 'levelcheck:edit_profile' user.leveluser.id%}">Edit Profile</a>
         </div>
+        {% endblock %}
     </aside>
 
     <div id="profile_main">
