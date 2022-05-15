@@ -31,12 +31,12 @@
 
             <fieldset style="height: 31%; margin-bottom: 7%">
                 <legend><span>Game Stats</span></legend>
-                <p><span style="color: green">⬤ </span>Playing:  {{request.user.leveluser.userstats.playing}}</p>
-                <p style="margin-top: 5%"><span style="color: midnightblue">⬤ </span>Completed:  {{request.user.leveluser.userstats.completed}}</p>
-                <p style="margin-top: 5%"><span style="color: yellow">⬤ </span>On-Hold:  {{request.user.leveluser.userstats.on_hold}}</p>
-                <p style="margin-top: 5%"><span style="color: darkred">⬤ </span>Dropped:  {{request.user.leveluser.userstats.dropped}}</p>
-                <p style="margin-top: 5%"><span style="color: grey">⬤ </span>Plan to Play:  {{request.user.leveluser.userstats.plan_to_play}}</p>
-                <p style="margin-top: 5%; margin-bottom: 2.5%"><span style="color: hotpink">⬤ </span>Total:  {{request.user.leveluser.userstats.total}}</p>
+                <p><span style="color: #240090">⬤ </span>Playing:  {{p}}</p>
+                <p style="margin-top: 5%"><span style="color: green">⬤ </span>Completed:  {{c}}</p>
+                <p style="margin-top: 5%"><span style="color: yellow">⬤ </span>On-Hold:  {{h}}</p>
+                <p style="margin-top: 5%"><span style="color: darkred">⬤ </span>Dropped:  {{d}}</p>
+                <p style="margin-top: 5%"><span style="color: grey">⬤ </span>Plan to Play:  {{f}}</p>
+                <p style="margin-top: 8%; margin-bottom: 5%">Total:  {{t}}</p>
             </fieldset>
 
             <input style="width: 30%; padding: 1%; display: inline" class="link_button" type="submit" value="Save">
