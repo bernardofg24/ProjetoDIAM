@@ -1,0 +1,150 @@
+@font-face {
+  font-family: detroit;
+  src: url("../fonts/nasalization-rg.otf");
+}
+
+html{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: detroit;
+}
+
+body{
+	background-image: url("../images/background.png");
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+nav{
+	background-color: #101010;
+	height: 5.3%;
+	margin: 0;
+	padding: 0;
+	border-bottom-style: solid;
+	border-color: #3500D3;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+}
+
+.nav_link{
+	background-color: #190061;
+	height: 70%;
+	margin: 0;
+	padding: 0;
+	padding-top: 2.5%;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.nav_link:visited, .nav_link:link{
+	color: white;
+}
+
+.nav_link:hover{
+	background-color: #240090;
+	cursor: pointer;
+}
+
+.nav_link:active{
+	background-color: #0C0032;
+}
+
+#main{
+	background-color: rgba(16,16,16,0.66);
+	height: 94%;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-color: #3500D3;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+legend, label{
+	margin: 0;
+	padding: 0;
+	color: white;
+	word-wrap: break-word;
+}
+
+.link_button{
+	background-color: #0C0032;
+	border: solid;
+	border-color: #3500D3;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	width: 80px;
+	height: 40px;
+	padding: 0;
+	margin: 0;
+	margin-top: 5%;
+	margin-left: 30%;
+	font-family: detroit;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 12px;
+}
+
+.link_button:hover{
+	background-color: #190061;
+}
+
+.link_button:active{
+	background-color: #0C0032;
+}
+
+.section_button{
+	height: 12.5%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+label{
+	font-weight: bold;
+	font-size: 1.2em;
+	padding-left: 2%;
+}
+
+fieldset{
+	border-color: #3500D3;
+	border-style: solid;
+	border-radius: 12px;
+	border-width: 3px;
+	background-color: rgb(16,16,16);
+	height: 35%;
+	margin-bottom: 4%;
+}
+
+input[type=date], input[type=text], select, textarea{
+	border-color: #3500D3;
+	border-style: solid;
+	border-radius: 8px;
+	background-color: rgb(16,16,16);
+	color: white;
+	width: 200px;
+	height: 20px;
+	font-family: detroit;
+	color-scheme: dark;
+	font-size: 0.8em;
+	margin-bottom: 5%;
+	margin-right: 20%;
+}
+
+input[type=file]{
+	color: white;
+	font-family: detroit;
+	width: 200px;
+}
