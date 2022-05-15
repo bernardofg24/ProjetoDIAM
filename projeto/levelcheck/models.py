@@ -76,6 +76,17 @@ class UserGames(models.Model):
         constraints = [models.UniqueConstraint(fields=['user', 'game'], name='user_game_stats')]
 
 
+class UserCharacters(models.Model):
+    FEEDBACK_OPTIONS = (('F', 'Favourite'), ('U', 'Unfavourite'))
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    character = models.ForeignKey(Character, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    type = models.CharField(max_length=1, choices=FEEDBACK_OPTIONS)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user', 'character', 'game'], name='user_character_favourites')]
+
+
 class Discussion(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=75)

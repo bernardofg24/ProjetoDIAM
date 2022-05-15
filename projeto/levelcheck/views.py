@@ -258,3 +258,20 @@ def user_games_stats(request, title, type):
         game_stats.save()
         url = reverse('levelcheck:game_detail', kwargs={'title': game.title})
         return HttpResponseRedirect(url)
+
+
+@login_required(login_url='/levelcheck')
+def user_characters_favourites(request, title, name, type):
+    character = get_object_or_404(Character, game_id=title, name=name)
+    user_characters = UserCharacters.objects.filter(game_id=title, character_id=character.id, user_id=request.user.id)
+    if user_characters:
+        user_characters = UserCharacters.objects.get(game_id=title, character_id=character.id, user_id=request.user.id)
+        user_characters.type = type
+        user_characters.save()
+        url = reverse('levelcheck:character_detail', kwargs={'title': title, 'name': character.name})
+        return HttpResponseRedirect(url)
+    else:
+        user_characters = UserCharacters(type=type, game_id=title, character_id=character.id, user_id=request.user.id)
+        user_characters.save()
+        url = reverse('levelcheck:character_detail', kwargs={'title': title, 'name': character.name})
+        return HttpResponseRedirect(url)
