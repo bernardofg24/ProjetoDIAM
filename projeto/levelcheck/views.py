@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import GameForm, GenreForm, CharacterForm
+from itertools import chain
 
 
 def login_form(request):
@@ -70,7 +71,24 @@ def index(request):
 
 @login_required(login_url='/levelcheck')
 def profile(request, username):
-    return render(request, 'levelcheck/profile.html', {'username': username})
+    usergames = UserGames.objects.filter(user_id=request.user.id)
+    games = Game.objects.none()
+    games_list = list()
+
+    for u in usergames:
+        game = Game.objects.get(pk=u.game_id)
+        games_list.append(game)
+
+    query_set = list(chain(games, games_list))
+
+    playing = usergames.filter(type='P').count()
+    completed = usergames.filter(type='C').count()
+    hold = usergames.filter(type='H').count()
+    dropped = usergames.filter(type='D').count()
+    plan = usergames.filter(type='F').count()
+    total = playing + completed + hold + dropped + plan
+
+    return render(request, 'levelcheck/profile.html', {'username': username, 'games': query_set, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')
@@ -131,7 +149,24 @@ def edit_profile(request, id):
         url = reverse('levelcheck:profile', kwargs={'username': username})
         return HttpResponseRedirect(url)
     else:
-        return render(request, 'levelcheck/edit_profile.html')
+        usergames = UserGames.objects.filter(user_id=request.user.id)
+        games = Game.objects.none()
+        games_list = list()
+
+        for u in usergames:
+            game = Game.objects.get(pk=u.game_id)
+            games_list.append(game)
+
+        query_set = list(chain(games, games_list))
+
+        playing = usergames.filter(type='P').count()
+        completed = usergames.filter(type='C').count()
+        hold = usergames.filter(type='H').count()
+        dropped = usergames.filter(type='D').count()
+        plan = usergames.filter(type='F').count()
+        total = playing + completed + hold + dropped + plan
+
+        return render(request, 'levelcheck/edit_profile.html', {'games': query_set, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')

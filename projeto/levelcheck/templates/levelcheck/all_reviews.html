@@ -26,7 +26,13 @@
                 {% endif %}
             </tr>
             {% empty %}
-                <p>No reviews :(</p>
+                <tr style="text-align: center" data-href="{% url 'levelcheck:logout' %}">
+                    <td></td>
+                    <td style="font-weight: bold; font-size: 1.5em">No reviews :(</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             {% endfor %}
         </table>
     </section>
