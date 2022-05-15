@@ -90,7 +90,8 @@ def character_detail(request, title, name):
 @login_required(login_url='/levelcheck')
 def review_detail(request, username, id):
     review = get_object_or_404(Review, pk=id)
-    likes = Review.objects.filter()
+    likes = ReviewFeedback.objects.filter(type='L', review_id=id).count()
+    dislikes = ReviewFeedback.objects.filter(type='D', review_id=id).count()
     return render(request, 'levelcheck/review_detail.html', {'review': review, 'likes': likes, 'dislikes': dislikes})
 
 

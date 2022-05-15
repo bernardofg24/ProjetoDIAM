@@ -37,9 +37,12 @@ class Review(models.Model):
 
 class ReviewFeedback(models.Model):
     FEEDBACK_OPTIONS = (('L', 'Like'), ('D', 'Dislike'))
-    user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='feedback')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='feedback')
     type = models.CharField(max_length=1, choices=FEEDBACK_OPTIONS)
-    review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='feedback')
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='feedback')
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user', 'review'], name='user_review_feedback')]
 
 
 class Character(models.Model):
