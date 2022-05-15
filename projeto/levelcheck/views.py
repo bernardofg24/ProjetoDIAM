@@ -66,7 +66,8 @@ def index(request):
     games = Game.objects.all().order_by('-release')[:5]
     characters = Character.objects.all().order_by('-pub_date')[:5]
     reviews = Review.objects.all().order_by('-pub_date')[:5]
-    return render(request, 'levelcheck/index.html', {'games': games, 'characters': characters, 'reviews': reviews})
+    news = Article.objects.all().order_by('-pub_date')[:10]
+    return render(request, 'levelcheck/index.html', {'games': games, 'characters': characters, 'reviews': reviews, 'news': news})
 
 
 @login_required(login_url='/levelcheck')
