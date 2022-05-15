@@ -19,11 +19,12 @@
         <h1 id="greeting">WELCOME {{request.user.username}}!</h1>
     {% endif %}
     {% if request.user.is_superuser %}
-        <div style="display: flex; height: 100%">
-            <a class="nav_link" style="width: 140px; padding-top: 2.75%" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
-            <a class="nav_link" style="width: 145px; padding-top: 2.75%" href="{% url 'levelcheck:create_genre' %}">CREATE GENRE</a>
-            <a class="nav_link" style="width: 190px; padding-top: 2.75%" href="{% url 'levelcheck:create_character' %}">CREATE CHARACTER</a>
-            <a class="nav_link" style="width: 90px; padding-top: 2.75%" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
+        <div style="display: flex; height: 95%">
+            <a class="nav_link" style="width: 140px; padding-top: 2.4%" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
+            <a class="nav_link" style="width: 145px; padding-top: 2.4%" href="{% url 'levelcheck:create_genre' %}">CREATE GENRE</a>
+            <a class="nav_link" style="width: 190px; padding-top: 2.4%" href="{% url 'levelcheck:create_character' %}">CREATE CHARACTER</a>
+            <a class="nav_link" style="width: 140px; padding-top: 2.4%" href="{% url 'levelcheck:create_game' %}">CREATE NEWS</a>
+            <a class="nav_link" style="width: 90px; padding-top: 2.4%" href="{% url 'levelcheck:logout' %}">LOGOUT</a>
         </div>
     {% else %}
         <div style="display: flex; height: 98%">
