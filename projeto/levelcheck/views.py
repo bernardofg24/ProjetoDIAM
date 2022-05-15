@@ -202,6 +202,13 @@ def create_review(request, title):
 
 
 @login_required(login_url='/levelcheck')
+def delete_review(request, game_id):
+    review = Review.objects.get(game_id=game_id, user_id=request.user.id)
+    review.delete()
+    return HttpResponseRedirect(reverse('levelcheck:all_reviews'))
+
+
+@login_required(login_url='/levelcheck')
 def all_games(request):
     games = Game.objects.all().order_by('-release')
     return render(request, 'levelcheck/all_games.html', context={'games': games})
@@ -220,36 +227,34 @@ def all_reviews(request):
 
 
 @login_required(login_url='/levelcheck')
-def review_feedback_like(request, review_id):
+def review_feedback_vote(request, review_id, type):
     review = get_object_or_404(Review, id=review_id)
     review_feedback = ReviewFeedback.objects.filter(review_id=review_id, user_id=request.user.id)
     if review_feedback:
         review_feedback = ReviewFeedback.objects.get(review_id=review_id, user_id=request.user.id)
-        review_feedback.type = "L"
+        review_feedback.type = type
         review_feedback.save()
         url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
         return HttpResponseRedirect(url)
     else:
-        review_feedback = ReviewFeedback(type="L", review_id=review_id, user_id=request.user.id)
+        review_feedback = ReviewFeedback(type=type, review_id=review_id, user_id=request.user.id)
         review_feedback.save()
         url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
         return HttpResponseRedirect(url)
 
 
 @login_required(login_url='/levelcheck')
-def review_feedback_dislike(request, review_id):
-    review = get_object_or_404(Review, id=review_id)
-    review_feedback = ReviewFeedback.objects.filter(review_id=review_id, user_id=request.user.id)
-    if review_feedback:
-        review_feedback = ReviewFeedback.objects.get(review_id=review_id, user_id=request.user.id)
-        review_feedback.type = "D"
-        review_feedback.save()
-        url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
+def user_games_stats(request, title, type):
+    game = get_object_or_404(Game, pk=title)
+    game_stats = UserGames.objects.filter(game_id=game.title, user_id=request.user.id)
+    if game_stats:
+        game_stats = UserGames.objects.get(game_id=game.title, user_id=request.user.id)
+        game_stats.type = type
+        game_stats.save()
+        url = reverse('levelcheck:game_detail', kwargs={'title': game.title})
         return HttpResponseRedirect(url)
     else:
-        review_feedback = ReviewFeedback(type="D", review_id=review_id, user_id=request.user.id)
-        review_feedback.save()
-        url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
+        game_stats = UserGames(type=type, game_id=title, user_id=request.user.id)
+        game_stats.save()
+        url = reverse('levelcheck:game_detail', kwargs={'title': game.title})
         return HttpResponseRedirect(url)
-
-
