@@ -268,47 +268,67 @@ fieldset{
 
 #profile_main{
 	height: 100%;
-	width: 84.8%;
+	width: 84.84%;
 	margin: 0;
 	padding: 0;
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
+.dropbtn{
+	background-color: #0C0032;
+  	border: solid;
+  	border-color: #3500D3;
+  	color: white;
+  	padding: 16px;
+  	font-size: 16px;
+  	font-family: detroit;
+  	cursor: pointer;
+  	border-radius: 12px;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+.dropdown{
+  	position: relative;
+  	display: inline-block;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+.dropdown-content{
+  	display: none;
+  	position: relative;
+  	background-color: #0C0032;
+  	min-width: 120px;
+  	z-index: 1;
+  	border-radius: 12px;
+	border-style: solid;
+	border-color: #240090;
 }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+.dropdown-content a{
+  	color: white;
+  	padding: 12px 16px;
+  	text-decoration: none;
+  	display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:nth-child(1){
+  	border-radius: 9px 9px 0px 0px;
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown-content a:nth-child(5){
+	border-radius: 0px 0px 9px 9px;
+}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown-content a:hover{
+	background-color: #190061;
+}
+
+.dropdown:hover .dropdown-content{
+	display: block;
+}
+
+.dropdown:hover .dropbtn{
+	background-color: #190061;
+}
 
 input[type=date], input[type=text], select, textarea{
 	border-color: #3500D3;

@@ -106,7 +106,8 @@ def profile(request, username):
 @login_required(login_url='/levelcheck')
 def game_detail(request, title):
     game = get_object_or_404(Game, pk=title)
-    return render(request, 'levelcheck/game_detail.html', {'game': game})
+    reviews = Review.objects.filter(game_id=game.title)
+    return render(request, 'levelcheck/game_detail.html', {'game': game, 'reviews': reviews})
 
 
 @login_required(login_url='/levelcheck')

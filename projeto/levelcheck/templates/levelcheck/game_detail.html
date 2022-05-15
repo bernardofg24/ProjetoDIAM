@@ -1,10 +1,16 @@
-{% extends "levelcheck/index.html" %}
+{% extends "levelcheck/profile.html" %}
 
-{% block content %}
-    <p>{{ game.title }}</p>
-    <button><a href="{% url 'levelcheck:create_review' game.title%}">Review</a></button>
-    <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
+{% block character %}
+    <img id="profile_pic" src="{{ game.img.url }}">
+    <div style="font-size: 1em" id="profile_desc">
+        <p><span>Title:</span>  {{game.title}}</p><br>
+        <p><span>Genre:</span>  {{game.genre_id}}</p><br>
+        <p><span>Developer:</span>  {{game.developer}}</p><br>
+        <p><span>Publisher:</span>  {{game.publisher}}</p><br>
+        <p><span>Release Date:</span></p>
+        <p>{{game.release}}</p><br>
+        <div class="dropdown">
+        <button class="dropbtn">Set Status</button>
         <div class="dropdown-content">
             <a href="{% url 'levelcheck:user_games_stats' game.title "P" %}">Playing</a>
             <a href="{% url 'levelcheck:user_games_stats' game.title "C" %}">Completed</a>
@@ -12,5 +18,35 @@
             <a href="{% url 'levelcheck:user_games_stats' game.title "D" %}">Dropped</a>
             <a href="{% url 'levelcheck:user_games_stats' game.title "F" %}">Plan to Play</a>
         </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block detail %}
+    <header><h1>REVIEWS</h1></header>
+    <section style="height: 83%">
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Reviewer</th>
+                <th>Rating</th>
+            </tr>
+            {% for r in reviews %}
+                <tr style="text-align: center" data-href="{% url 'levelcheck:review_detail' r.user.username r.id %}">
+                    <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ r.review_title }}</td>
+                    <td style="width: 5%">{{ r.user.username }}</td>
+                    <td style="width: 5%">{{ r.rating }}</td>
+                </tr>
+            {% empty %}
+                <tr style="text-align: center">
+                    <td style="font-weight: bold; font-size: 1.5em">No reviews :(</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+    <div style="height: 7%" class="section_button">
+        <a style="width: 7.5%" class="link_button" href="{% url 'levelcheck:create_review' game.title%}">Add Review</a>
     </div>
 {% endblock %}

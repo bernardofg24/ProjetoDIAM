@@ -8,13 +8,12 @@
 </head>
 <body>
 <nav>
-    <div style="display: flex; height: 100%">
-        <a class="nav_link" style="width: 75px" href="{% url 'levelcheck:index' %}">INDEX</a>
-        <a class="nav_link" style="width: 85px" href="{% url 'levelcheck:all_games' %}">GAMES</a>
-        <a class="nav_link" style="width: 130px" href="{% url 'levelcheck:all_characters' %}">CHARACTERS</a>
-        <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:all_reviews' %}">REVIEWS</a>
-        <a class="nav_link" style="width: 135px" href="{% url 'levelcheck:all_games' %}">DISCUSSIONS</a>
-        <a class="nav_link" style="width: 75px" href="{% url 'levelcheck:all_games' %}">USERS</a>
+    <div style="display: flex; height: 98%">
+        <a class="nav_link" style="width: 75px; padding-top: 3.5%" href="{% url 'levelcheck:index' %}">INDEX</a>
+        <a class="nav_link" style="width: 85px; padding-top: 3.5%" href="{% url 'levelcheck:all_games' %}">GAMES</a>
+        <a class="nav_link" style="width: 130px; padding-top: 3.5%" href="{% url 'levelcheck:all_characters' %}">CHARACTERS</a>
+        <a class="nav_link" style="width: 100px; padding-top: 3.5%" href="{% url 'levelcheck:all_reviews' %}">REVIEWS</a>
+        <a class="nav_link" style="width: 75px; padding-top: 3.5%" href="{% url 'levelcheck:all_games' %}">USERS</a>
     </div>
     {% if not request.user.is_superuser %}
         <h1 id="greeting">WELCOME {{request.user.username}}!</h1>
@@ -121,7 +120,7 @@
     </div>
 
     <div id="bottom_right">
-        <header><h1>RECENT DISCUSSIONS</h1></header>
+        <header><h1>NEWS</h1></header>
         <section>
 
 		<table>

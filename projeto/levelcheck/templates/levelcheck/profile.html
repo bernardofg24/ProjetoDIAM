@@ -30,8 +30,8 @@
         {% endblock %}
     </aside>
 
-    {% block detail %}
-        <div id="profile_main">
+    <div id="profile_main">
+        {% block detail %}
             <div style="width: 50%; height: 50%" id="top_left">
                 <header><h1>GAMES</h1></header>
                 <section style="height: 90%">
@@ -166,8 +166,8 @@
                 </table>
             </section>
             </div>
-        </div>
-    {% endblock %}
+        {% endblock %}
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
