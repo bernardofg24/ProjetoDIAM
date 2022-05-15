@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Review for {{ game.title }}</title>
-</head>
-<body>
-    <form action="{% url 'levelcheck:create_review' game.title%}" method="post">
-    {% csrf_token %}
-    <label for="title">Title</label>
-    <input type="text" id="title" name="title" required><br>
-    <label for="game">Game</label>
-    <input type="text" id="game" name="game" value="{{ game.title }}" readonly><br>
-    <label for="username">by</label>
-    <input type="text" id="username" name="username" value="{{ request.user.username }}" readonly><br>
-    <label for="text">Text</label>
-    <input type="text" id="text" name="text" required><br>
-    <label for="rating">Rating(0-100)</label>
-    <input type="number" id="rating" name="rating" min="0" max="100" step="1" value="50" required><br>
-    <input type="submit" value="Create Review"><br><br>
+{% extends "levelcheck/index.html" %}
+
+{% block content %}
+    <form style="margin: auto; width: 75%; height: 75%" action="{% url 'levelcheck:create_review' game.title%}" method="post">
+        {% csrf_token %}
+        <fieldset style="width: 100%; height: 98%; padding-top: 2%">
+            <label style="margin: 0; margin-left: 5%" for="username">By:</label>
+            <input style="margin: 0; margin-right: 1%; padding: 0; padding-left: 0.5%; width: 20%; height: 4%" type="text" id="username" name="username" value="{{ request.user.username }}" readonly>
+            <label for="game">For:</label>
+            <input style="margin: 0; margin-right: 1%; padding: 0; padding-left: 0.5%; width: 20%; height: 4%" type="text" id="game" name="game" value="{{ game.title }}" readonly>
+            <label for="title">Title:</label>
+            <input style="margin: 0; margin-right: 1%; padding: 0; padding-left: 0.5%; width: 20%; height: 4%" type="text" id="title" name="title" required>
+            <label for="rating">Rating(0-100):</label>
+            <input style="margin: 0; padding: 0; padding-left: 0.5%; width: 3%; height: 4%" type="number" id="rating" name="rating" min="0" max="100" step="1" value="50" required>
+            <br>
+            <div style="width: 100%; height: 80%; margin-top: 2%">
+                <label for="text">Review:</label><br>
+                <textarea style="width: 99.5%; padding: 0.2%; height: 95%" id="text" name="text" required></textarea>
+            </div>
+            <div style="height: 8%; margin-top: 1.5%" class="section_button">
+                <input style="height: 70%; width: 11%" class="link_button" type="submit" value="Submit Review">
+            </div>
+        </fieldset>
     </form>
-</body>
-</html>
+{% endblock %}
