@@ -1,5 +1,9 @@
 {% extends "levelcheck/index.html" %}
 
+{% block tab %}
+    <title>{{review.review_title}} by {{review.user.username}}</title>
+{% endblock %}
+
 {% block content %}
     <fieldset style="margin: auto; width: 75%; height: 75%">
         <legend><span>{{review.review_title}}</span></legend>

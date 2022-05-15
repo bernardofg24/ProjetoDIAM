@@ -1,5 +1,9 @@
 {% extends "levelcheck/profile.html" %}
 
+{% block tab %}
+    <title>{{owner.user.username}}</title>
+{% endblock %}
+
 {% block character %}
     {% load static %}
     <img id="profile_pic" src="{% static owner.img_src %}">

@@ -1,5 +1,9 @@
 {% extends "levelcheck/index.html" %}
 
+{% block tab %}
+    <title>{{request.user.username}}</title>
+{% endblock %}
+
 {% block content %}
     <aside>
         {% block character %}

@@ -1,5 +1,9 @@
 {% extends "levelcheck/index.html" %}
 
+{% block tab %}
+    <title>Review for {{ game.title }}</title>
+{% endblock %}
+
 {% block content %}
     <form style="margin: auto; width: 75%; height: 75%" action="{% url 'levelcheck:create_review' game.title%}" method="post">
         {% csrf_token %}

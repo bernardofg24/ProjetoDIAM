@@ -1,5 +1,9 @@
 {% extends "levelcheck/profile.html" %}
 
+{% block tab %}
+    <title>{{character.name}}</title>
+{% endblock %}
+
 {% block character %}
     <img id="profile_pic" src="{{ character.img.url }}">
     <div style="font-size: 1em" id="profile_desc">

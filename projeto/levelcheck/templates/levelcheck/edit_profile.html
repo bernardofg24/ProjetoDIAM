@@ -1,5 +1,9 @@
 {% extends "levelcheck/profile.html" %}
 
+{% block tab %}
+    <title>{{request.user.username}}</title>
+{% endblock %}
+
 {% block profile %}
     <div id="profile_desc">
         <p><span>Username:</span>  {{request.user.username}}</p><br>
