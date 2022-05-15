@@ -56,7 +56,7 @@ class LevelUser(models.Model):
     birthday = models.CharField(max_length=50)
     img_src = models.CharField(max_length=150)
     location = models.CharField(max_length=50, default="Earth")
-    joined = models.DateTimeField('Joined')
+    joined = models.DateField('Joined')
     bio = models.CharField(max_length=500, default="Your Bio!")
 
     def __str__(self):
