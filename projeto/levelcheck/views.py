@@ -201,3 +201,38 @@ def all_characters(request):
 def all_reviews(request):
     reviews = Review.objects.all().order_by('-pub_date')
     return render(request, 'levelcheck/all_reviews.html', context={'reviews': reviews})
+
+
+@login_required(login_url='/levelcheck')
+def review_feedback_like(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    review_feedback = ReviewFeedback.objects.filter(review_id=review_id, user_id=request.user.id)
+    if review_feedback:
+        review_feedback = ReviewFeedback.objects.get(review_id=review_id, user_id=request.user.id)
+        review_feedback.type = "L"
+        review_feedback.save()
+        url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
+        return HttpResponseRedirect(url)
+    else:
+        review_feedback = ReviewFeedback(type="L", review_id=review_id, user_id=request.user.id)
+        review_feedback.save()
+        url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
+        return HttpResponseRedirect(url)
+
+
+@login_required(login_url='/levelcheck')
+def review_feedback_dislike(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    review_feedback = ReviewFeedback.objects.filter(review_id=review_id, user_id=request.user.id)
+    if review_feedback:
+        review_feedback = ReviewFeedback.objects.get(review_id=review_id, user_id=request.user.id)
+        review_feedback.type = "D"
+        review_feedback.save()
+        url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
+        return HttpResponseRedirect(url)
+    else:
+        review_feedback = ReviewFeedback(type="D", review_id=review_id, user_id=request.user.id)
+        review_feedback.save()
+        url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
+        return HttpResponseRedirect(url)
+

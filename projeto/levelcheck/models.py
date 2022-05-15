@@ -30,11 +30,16 @@ class Review(models.Model):
     text = models.CharField(max_length=300)
     rating = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)])
     pub_date = models.DateTimeField('Posted', default=timezone.now)
-    like = models.IntegerField(default=0)
-    dislike = models.IntegerField(default=0)
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=['user', 'game'], name='user_game_review')]
+
+
+class ReviewFeedback(models.Model):
+    FEEDBACK_OPTIONS = (('L', 'Like'), ('D', 'Dislike'))
+    user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='feedback')
+    type = models.CharField(max_length=1, choices=FEEDBACK_OPTIONS)
+    review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='feedback')
 
 
 class Character(models.Model):
