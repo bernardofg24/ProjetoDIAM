@@ -15,7 +15,7 @@
                 {% endif %}
             </tr>
             {% for l in levelusers %}
-            <tr style="text-align: center" data-href="{% url 'levelcheck:logout' %}">
+            <tr style="text-align: center" data-href="{% url 'levelcheck:user_detail' l.id %}">
                 {% load static %}
                 <td style="width: 1.5%"><img class="table_image" src="{% static l.img_src %}"></td>
                 <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ l.user.username }}</td>

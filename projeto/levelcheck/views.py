@@ -125,6 +125,12 @@ def review_detail(request, username, id):
 
 
 @login_required(login_url='/levelcheck')
+def user_detail(request, id):
+    profile_owner = get_object_or_404(LevelUser, pk=id)
+    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner})
+
+
+@login_required(login_url='/levelcheck')
 def edit_profile(request, id):
     if request.method == 'POST':
         leveluser = get_object_or_404(LevelUser, pk=id)

@@ -28,6 +28,7 @@ urlpatterns = [
     path('deletereview/<str:game_id>', views.delete_review, name='delete_review'),
     path('profile/<str:username>', views.profile, name='profile'),
     path('editprofile/<int:id>', views.edit_profile, name='edit_profile'),
+    path('<int:id>', views.user_detail, name='user_detail'),
     path('<str:title>', views.game_detail, name='game_detail'),
     path('<str:title>/<str:name>', views.character_detail, name='character_detail'),
     path('review/<str:username>/<int:id>', views.review_detail, name='review_detail'),
