@@ -13,6 +13,8 @@ from itertools import chain
 
 
 def login_form(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('index')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
