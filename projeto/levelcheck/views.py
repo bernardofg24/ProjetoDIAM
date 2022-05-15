@@ -148,6 +148,13 @@ def create_game(request):
 
 
 @login_required(login_url='/levelcheck')
+def delete_game(request, title):
+    game = get_object_or_404(Game, pk=title)
+    game.delete()
+    return HttpResponseRedirect(reverse('levelcheck:all_games'))
+
+
+@login_required(login_url='/levelcheck')
 def create_genre(request):
     if request.method == "POST":
         genre_form = GenreForm(request.POST)
@@ -169,6 +176,13 @@ def create_character(request):
     else:
         character_form = CharacterForm()
         return render(request, 'levelcheck/create_character.html', context={"character_form": character_form})
+
+
+@login_required(login_url='/levelcheck')
+def delete_character(request, title, name):
+    character = Character.objects.get(name=name, game_id=title)
+    character.delete()
+    return HttpResponseRedirect(reverse('levelcheck:all_characters'))
 
 
 @login_required(login_url='/levelcheck')
