@@ -71,6 +71,7 @@ h1, h2, p, legend{
 	margin: 0;
 	padding: 0;
 	color: white;
+	word-wrap: break-word;
 }
 
 #greeting{
@@ -218,6 +219,7 @@ section{
 
 aside{
 	width: 15%;
+	height: 100%;
 	margin: 0;
 	padding: 0;
 	float: left;
@@ -243,11 +245,14 @@ aside{
 	margin: auto;
 	margin-top: 2%;
 	padding: 0;
+	font-size: 0.8em;
 }
 
 span{
 	font-weight: bold;
 	font-size: 1.2em;
+	padding: 0;
+	margin: 0;
 }
 
 fieldset{
@@ -256,6 +261,15 @@ fieldset{
 	border-radius: 12px;
 	border-width: 3px;
 	background-color: rgb(16,16,16);
-	height: 42%;
+	height: 35%;
 	margin-bottom: 4%;
+}
+
+#profile_main{
+	height: 100%;
+	width: 84.8%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
 }
