@@ -66,18 +66,14 @@ class LevelUser(models.Model):
         return self.user
 
 
-class UserStats(models.Model):
-    leveluser = models.OneToOneField(LevelUser, on_delete=models.CASCADE)
-    total = models.IntegerField(default=0)
-    playing = models.IntegerField(default=0)
-    completed = models.IntegerField(default=0)
-    on_hold = models.IntegerField(default=0)
-    dropped = models.IntegerField(default=0)
-    plan_to_play = models.IntegerField(default=0)
-    games = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
-    characters = models.ForeignKey(Character, on_delete=models.CASCADE, null=True)
-    genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
-    reviews = models.ForeignKey(Review, on_delete=models.SET_NULL, null=True)
+class UserGames(models.Model):
+    FEEDBACK_OPTIONS = (('P', 'Playing'), ('C', 'Completed'), ('H', 'Hold'), ('D', 'Dropped'), ('F', 'Plan-to-Play'))
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    type = models.CharField(max_length=1, choices=FEEDBACK_OPTIONS)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user', 'game'], name='user_game_stats')]
 
 
 class Discussion(models.Model):

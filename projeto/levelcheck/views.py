@@ -55,8 +55,6 @@ def create_acc(request):
         u.save()
         level = LevelUser(user=u, birthday=birthday, img_src=src, joined=joined)
         level.save()
-        stats = UserStats(leveluser=level)
-        stats.save()
         return HttpResponseRedirect(reverse('levelcheck:login_form'))
     else:
         return render(request, 'levelcheck/create_acc.html')
@@ -252,4 +250,5 @@ def review_feedback_dislike(request, review_id):
         review_feedback.save()
         url = reverse('levelcheck:review_detail', kwargs={'username': review.user.username, 'id': review.id})
         return HttpResponseRedirect(url)
+
 
