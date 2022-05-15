@@ -128,7 +128,8 @@ def edit_profile(request, id):
         leveluser.img_src = uploaded_file_url
 
         leveluser.save(update_fields=["gender", "birthday", "location", "bio", "img_src"])
-        return HttpResponseRedirect(reverse('levelcheck:profile', args=username))
+        url = reverse('levelcheck:profile', kwargs={'username': username})
+        return HttpResponseRedirect(url)
     else:
         return render(request, 'levelcheck/edit_profile.html')
 
