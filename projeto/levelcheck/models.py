@@ -90,5 +90,5 @@ class UserCharacters(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=75, primary_key=True)
     link = models.CharField(max_length=150)
-    img_src = models.CharField(max_length=150)
-    pub_date = models.DateTimeField('Posted')
+    img = models.ImageField(upload_to='news/')
+    pub_date = models.DateTimeField('Posted', default=timezone.now)

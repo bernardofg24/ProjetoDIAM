@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout as django_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .forms import GameForm, GenreForm, CharacterForm
+from .forms import GameForm, GenreForm, CharacterForm, ArticleForm
 from itertools import chain
 
 
@@ -272,6 +272,18 @@ def delete_review(request, game_id):
     review = Review.objects.get(game_id=game_id, user_id=request.user.id)
     review.delete()
     return HttpResponseRedirect(reverse('levelcheck:all_reviews'))
+
+
+@login_required(login_url='/levelcheck')
+def create_article(request):
+    if request.method == "POST":
+        article_form = ArticleForm(request.POST, request.FILES)
+        if article_form.is_valid():
+            article_form.save()
+        return HttpResponseRedirect(reverse('levelcheck:index'))
+    else:
+        article_form = ArticleForm()
+        return render(request, 'levelcheck/create_article.html', context={"article_form": article_form})
 
 
 @login_required(login_url='/levelcheck')
