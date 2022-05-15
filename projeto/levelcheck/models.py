@@ -24,8 +24,8 @@ class Game(models.Model):
 
 
 class Review(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    game = models.OneToOneField(Game, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
     review_title = models.CharField(max_length=50)
     text = models.CharField(max_length=300)
     rating = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)])
@@ -85,6 +85,16 @@ class UserCharacters(models.Model):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=['user', 'character', 'game'], name='user_character_favourites')]
+
+
+class UserFollowers(models.Model):
+    FEEDBACK_OPTIONS = (('F', 'Follow'), ('U', 'Unfollow'))
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
+    followed = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followed')
+    type = models.CharField(max_length=1, choices=FEEDBACK_OPTIONS)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['follower', 'followed'], name='follower_followed')]
 
 
 class Article(models.Model):
