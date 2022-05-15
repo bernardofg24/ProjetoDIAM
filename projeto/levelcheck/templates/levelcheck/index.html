@@ -15,8 +15,10 @@
         <a class="nav_link" style="width: 100px" href="{% url 'levelcheck:all_reviews' %}">REVIEWS</a>
         <a class="nav_link" style="width: 120px" href="{% url 'levelcheck:all_games' %}">DISCUSSIONS</a>
     </div>
-    <h1 id="greeting">WELCOME {{request.user.username}}!</h1>
-    <div style="display: flex">
+    {% if not request.user.is_superuser %}
+        <h1 id="greeting">WELCOME {{request.user.username}}!</h1>
+    {% endif %}
+    <div style="display: flex; height: 97.5%">
         {% if request.user.is_superuser %}
             <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_game' %}">CREATE GAME</a>
             <a class="nav_link" style="width: 140px" href="{% url 'levelcheck:create_genre' %}">CREATE GENRE</a>
