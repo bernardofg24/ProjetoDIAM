@@ -79,7 +79,19 @@ def profile(request, username):
         game = Game.objects.get(pk=u.game_id)
         games_list.append(game)
 
-    query_set = list(chain(games, games_list))
+    query_games = list(chain(games, games_list))
+
+    usercharacters = UserCharacters.objects.filter(user_id=request.user.id, type='F')
+    characters = Character.objects.none()
+    characters_list = list()
+
+    for u in usercharacters:
+        character = Character.objects.get(pk=u.character_id)
+        characters_list.append(character)
+
+    query_characters = list(chain(characters, characters_list))
+
+    reviews = Review.objects.filter(user_id=request.user.id)
 
     playing = usergames.filter(type='P').count()
     completed = usergames.filter(type='C').count()
@@ -88,7 +100,7 @@ def profile(request, username):
     plan = usergames.filter(type='F').count()
     total = playing + completed + hold + dropped + plan
 
-    return render(request, 'levelcheck/profile.html', {'username': username, 'games': query_set, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
+    return render(request, 'levelcheck/profile.html', {'username': username, 'games': query_games, 'characters': query_characters, 'reviews': reviews, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')
@@ -157,7 +169,19 @@ def edit_profile(request, id):
             game = Game.objects.get(pk=u.game_id)
             games_list.append(game)
 
-        query_set = list(chain(games, games_list))
+        query_games = list(chain(games, games_list))
+
+        usercharacters = UserCharacters.objects.filter(user_id=request.user.id, type='F')
+        characters = Character.objects.none()
+        characters_list = list()
+
+        for u in usercharacters:
+            character = Character.objects.get(pk=u.character_id)
+            characters_list.append(character)
+
+        query_characters = list(chain(characters, characters_list))
+
+        reviews = Review.objects.filter(user_id=request.user.id)
 
         playing = usergames.filter(type='P').count()
         completed = usergames.filter(type='C').count()
@@ -166,7 +190,7 @@ def edit_profile(request, id):
         plan = usergames.filter(type='F').count()
         total = playing + completed + hold + dropped + plan
 
-        return render(request, 'levelcheck/edit_profile.html', {'games': query_set, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
+        return render(request, 'levelcheck/edit_profile.html', {'games': query_games, 'characters': query_characters, 'reviews': reviews, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')
