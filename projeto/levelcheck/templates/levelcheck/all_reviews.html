@@ -10,7 +10,9 @@
                 <th>Reviewer</th>
 			    <th>Game</th>
 			    <th>Rating</th>
-                <th></th>
+                {% if request.user.is_superuser %}
+                    <th></th>
+                {% endif %}
             </tr>
             {% for r in reviews %}
             <tr style="text-align: center" data-href="{% url 'levelcheck:review_detail' r.user.username r.id %}">
@@ -19,7 +21,9 @@
                 <td style="width: 5%">{{ r.user.username }}</td>
                 <td style="width: 5%">{{ r.game.title }}</td>
                 <td style="width: 5%">{{ r.rating }}</td>
-                <td style="width: 5%"><a style="padding: 2%" class="link_button">Delete</a></td>
+                {% if request.user.is_superuser %}
+                    <td style="width: 5%"><a style="padding: 2%" class="link_button">Delete</a></td>
+                {% endif %}
             </tr>
             {% empty %}
                 <p>No reviews :(</p>
