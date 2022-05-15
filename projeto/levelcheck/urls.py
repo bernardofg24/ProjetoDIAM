@@ -20,6 +20,7 @@ urlpatterns = [
     path('creategenre', views.create_genre, name='create_genre'),
     path('review/up/<int:review_id>', views.review_feedback_like, name='review_feedback_like'),
     path('review/down/<int:review_id>', views.review_feedback_dislike, name='review_feedback_dislike'),
+    path('stats/<str:title>/<str:type>', views.user_games_stats, name='user_games_stats'),
     path('createcharacter', views.create_character, name='create_character'),
     path('deletecharacter/<str:title>/<str:name>', views.delete_character, name='delete_character'),
     path('createreview/<str:title>', views.create_review, name='create_review'),

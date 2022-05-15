@@ -253,3 +253,18 @@ def review_feedback_dislike(request, review_id):
         return HttpResponseRedirect(url)
 
 
+@login_required(login_url='/levelcheck')
+def user_games_stats(request, title, type):
+    game = get_object_or_404(Game, pk=title)
+    game_stats = UserGames.objects.filter(game_id=game.title, user_id=request.user.id)
+    if game_stats:
+        game_stats = UserGames.objects.get(game_id=game.title, user_id=request.user.id)
+        game_stats.type = type
+        game_stats.save()
+        url = reverse('levelcheck:game_detail', kwargs={'title': game.title})
+        return HttpResponseRedirect(url)
+    else:
+        game_stats = UserGames(type=type, game_id=title, user_id=request.user.id)
+        game_stats.save()
+        url = reverse('levelcheck:game_detail', kwargs={'title': game.title})
+        return HttpResponseRedirect(url)
