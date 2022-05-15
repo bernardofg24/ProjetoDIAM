@@ -142,10 +142,12 @@ def review_detail(request, username, id):
 @login_required(login_url='/levelcheck')
 def user_detail(request, id):
     profile_owner = get_object_or_404(LevelUser, pk=id)
+    user_relation = UserFollowers.objects.filter(follower_id=request.user.id, followed_id=profile_owner.user.id)
+    if not user_relation:
+        user_relation = 'E'
     if request.user.id == profile_owner.user.id:
         url = reverse('levelcheck:profile', kwargs={'username': request.user.username})
         return HttpResponseRedirect(url)
-    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner})
 
     usergames = UserGames.objects.filter(user_id=profile_owner.user.id)
     games = Game.objects.none()
@@ -186,7 +188,7 @@ def user_detail(request, id):
 
     query_follows = list(chain(follows, follows_list))
 
-    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner, 'games': query_games, 'characters': query_characters, 'reviews': reviews, 'follows': query_follows, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
+    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner, 'relation': user_relation, 'games': query_games, 'characters': query_characters, 'reviews': reviews, 'follows': query_follows, 'usergames': usergames, 'p': playing, 'c': completed, 'h': hold, 'd': dropped, 'f': plan, 't': total})
 
 
 @login_required(login_url='/levelcheck')
