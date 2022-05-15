@@ -87,9 +87,8 @@ class UserCharacters(models.Model):
         constraints = [models.UniqueConstraint(fields=['user', 'character', 'game'], name='user_character_favourites')]
 
 
-class Discussion(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=75)
-    text = models.CharField(max_length=300)
-    comments = models.ForeignKey(Comment, on_delete=models.CASCADE)
+class Article(models.Model):
+    title = models.CharField(max_length=75, primary_key=True)
+    link = models.CharField(max_length=150)
+    img_src = models.CharField(max_length=150)
     pub_date = models.DateTimeField('Posted')

@@ -1,0 +1,48 @@
+{% extends "levelcheck/index.html" %}
+
+{% block content %}
+    <header style="height: 5%"><h1>REVIEWS</h1></header>
+    <section style="height: 94.7%">
+        <table>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Reviewer</th>
+			    <th>Game</th>
+			    <th>Rating</th>
+                {% if request.user.is_superuser %}
+                    <th></th>
+                {% endif %}
+            </tr>
+            {% for l in levelusers %}
+            <tr style="text-align: center" data-href="{% url 'levelcheck:user_detail' l.id %}">
+                {% load static %}
+                <td style="width: 1.5%"><img class="table_image" src="{% static l.img_src %}"></td>
+                <td style="width: 5%; font-weight: bold; font-size: 1.5em">{{ l.user.username }}</td>
+                <td style="width: 5%">{{ l.user.last_login }}</td>
+                <td style="width: 5%">{{ l.joined }}</td>
+            </tr>
+            {% empty %}
+                <tr style="text-align: center">
+                    <td></td>
+                    <td style="font-weight: bold; font-size: 1.5em">No users :(</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+
+            rows.forEach(row => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+{% endblock %}

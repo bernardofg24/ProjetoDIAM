@@ -126,6 +126,12 @@ def review_detail(request, username, id):
 
 
 @login_required(login_url='/levelcheck')
+def user_detail(request, id):
+    profile_owner = get_object_or_404(LevelUser, pk=id)
+    return render(request, 'levelcheck/user_detail.html', {'owner': profile_owner})
+
+
+@login_required(login_url='/levelcheck')
 def edit_profile(request, id):
     if request.method == 'POST':
         leveluser = get_object_or_404(LevelUser, pk=id)
@@ -284,6 +290,21 @@ def all_characters(request):
 def all_reviews(request):
     reviews = Review.objects.all().order_by('-pub_date')
     return render(request, 'levelcheck/all_reviews.html', context={'reviews': reviews})
+
+
+@login_required(login_url='/levelcheck')
+def all_users(request):
+    users = User.objects.all().exclude(is_superuser=1).order_by('-last_login')
+    empty = Game.objects.none()
+    levelusers_list = list()
+
+    for u in users:
+        leveluser = LevelUser.objects.get(user_id=u.id)
+        levelusers_list.append(leveluser)
+
+    query_levelusers = list(chain(empty, levelusers_list))
+
+    return render(request, 'levelcheck/all_users.html', context={'levelusers': query_levelusers})
 
 
 @login_required(login_url='/levelcheck')
